@@ -1,9 +1,11 @@
 @import "../../index.scss";
 
 .header, {
-  padding: 15px 0;
+  margin-bottom: 100px;
+  padding: 15px 80px;
   display: flex;
   justify-content: space-between;
+  background-color: #FFFFFF;
 
   &__link {
     display: flex;

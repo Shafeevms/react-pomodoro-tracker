@@ -1,0 +1,14 @@
+@import "../../index";
+
+.timer {
+  height: 507px;
+  background-color: $medium-gray;
+}
+
+.header {
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  background-color: $dark-gray;
+  color: #FFF;
+}

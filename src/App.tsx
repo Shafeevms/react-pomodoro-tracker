@@ -6,14 +6,14 @@ import ErrorPage from './Components/404';
 
 function App() {
   return (
-    <>
+    <div>
     <Header/>
       <Routes>
         <Route path='/' element={<Tracker/>}/>
         <Route path='statistics' element={<Statistics/>}/>
         <Route path='*' element={<ErrorPage/>}/>
       </Routes>
-    </>
+    </div>
   );
 }
 
