@@ -3,22 +3,28 @@ import clsx from 'clsx';
 import styles from './index.module.scss';
 
 
-export enum EButton {
+export enum EButtonColor {
   green = 'green',
   gray = 'gray',
   red = 'red',
   modal_red = 'modal_red'
 }
 
-interface IButton {
-  text: string,
-  view?: EButton
+export enum EButtonMargin {
+  mb25 = 'mb25',
+  default = '',
 }
 
-const Index = ({ text, view = EButton.green }:IButton) => {
+interface IButton {
+  text: string,
+  view?: EButtonColor,
+  mb?: EButtonMargin
+}
+
+const Index = ({ text, view = EButtonColor.green, mb = EButtonMargin.default}:IButton) => {
 
   return (
-    <button className={clsx(styles.button, styles[view])}>
+    <button className={clsx(styles.button, styles[view], styles[mb])}>
       {text}
     </button>
   );

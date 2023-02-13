@@ -1,5 +1,5 @@
 import TIMER from '../TIMER';
-import Form from '../Form';
+import Todos from '../Todos';
 
 import styles from './index.module.scss';
 
@@ -18,7 +18,7 @@ const Tracker = () => {
             делайте длинный перерыв (15-30 минут).
           </li>
         </ul>
-        <Form/>
+        <Todos/>
       </section>
       <section>
         <TIMER/>

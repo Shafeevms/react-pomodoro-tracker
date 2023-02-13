@@ -2,10 +2,15 @@
 
 .header, {
   margin-bottom: 100px;
-  padding: 15px 80px;
-  display: flex;
-  justify-content: space-between;
   background-color: #FFFFFF;
+
+  &__container {
+    margin: 0 auto;
+    padding: 15px 80px;
+    max-width: 1440px;
+    display: flex;
+    justify-content: space-between;
+  }
 
   &__link {
     display: flex;
