@@ -1,9 +1,13 @@
 import styles from './index.module.css';
 
 
-const MenuButton = () => {
+interface IMenuButton {
+  onClick: () => void,
+}
+
+const MenuButton = ({ onClick }: IMenuButton) => {
   return (
-    <button className={styles.button}>
+    <button className={styles.button} onClick={onClick}>
       <img src={'/img/menubutton.png'}/>
     </button>
   );

@@ -13,11 +13,10 @@ const Todos = () => {
       <Form/>
       <ul>
         {todos && todos.map(todoItem => {
-          const { todo, tomatoes, id } = todoItem;
+          const { id } = todoItem;
           return <TodoItem
             key={id}
-            tomatoes={tomatoes}
-            todo={todo}
+            todoElement={todoItem}
           />;
         })
         }

@@ -1,18 +1,20 @@
-import MenuButton from '../Common/MenuButton';
+import DropDown from '../../DropDown';
 
 import styles from './index.module.scss';
+import { ITodo } from './todosSlice';
+
 
 interface ITodoItem {
-  tomatoes: number,
-  todo: string
+  todoElement: ITodo,
 }
 
-const TodoItem = ({ todo, tomatoes }: ITodoItem) => {
+const TodoItem = ({ todoElement }: ITodoItem) => {
+  const {todo, tomatoes, id} = todoElement;
   return (
     <li className={styles.item}>
       <span className={styles.item__tomato}>{tomatoes}</span>
       <div className={styles.item__todo}>{todo}</div>
-      <MenuButton/>
+      <DropDown id={id}/>
     </li>
   );
 };

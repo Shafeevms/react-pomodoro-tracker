@@ -18,6 +18,9 @@ const Form = () => {
 
   const handleSubmit = (event:React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (inputValue === '') {
+      return;
+    }
     const todo: ITodo = {
       todo: inputValue,
       tomatoes: 1,

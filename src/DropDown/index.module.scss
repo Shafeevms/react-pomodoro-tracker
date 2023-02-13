@@ -1,0 +1,20 @@
+.menu {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 5;
+
+  &__inner {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+  }
+
+  &__button {
+    position: relative;
+    z-index: 15;
+  }
+}
