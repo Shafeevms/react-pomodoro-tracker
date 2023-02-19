@@ -5,7 +5,8 @@ import { Provider } from 'react-redux';
 import { store } from './store/store';
 import App from './App';
 
-
+import './reset.css';
+import 'normalize.css';
 import './index.scss';
 
 const container = document.getElementById('root')!;

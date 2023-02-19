@@ -1,19 +1,9 @@
 * {
   box-sizing: border-box;
+}
+
+body {
   color: #333333;
-}
-
-a {
-  text-decoration: none;
-}
-
-li {
-  list-style: none;
-}
-
-body, ul, p {
-  margin: 0;
-  padding: 0;
   font-family: 'SF UI Display', sans-serif;
   background-color: #F5F5F5;
 }
@@ -27,4 +17,5 @@ button {
 $tomato: #DC3E22;
 $dark-gray: #C4C4C4;
 $medium-gray: #E5E5E5;
+$white: #FFFFFF;
 

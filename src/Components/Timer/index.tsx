@@ -2,7 +2,7 @@ import Header from './header';
 
 import styles from './index.module.scss'
 
-const TIMER = () => {
+const Timer = () => {
   return (
     <div className={styles.timer}>
       <Header/>
@@ -10,4 +10,4 @@ const TIMER = () => {
   );
 };
 
-export default TIMER;
+export default Timer;

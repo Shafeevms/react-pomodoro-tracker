@@ -1,12 +1,11 @@
 import { useAppSelector } from '../../store/hooks';
-import { todosState } from './todosSlice';
+import { selectTodos } from './todosSlice';
 
 import Form from './Form';
-import TodoItem from './todoItem';
-
+import TodoItem from './TodoItem';
 
 const Todos = () => {
-  const todos = useAppSelector(todosState);
+  const todos = useAppSelector(selectTodos);
 
   return (
     <>

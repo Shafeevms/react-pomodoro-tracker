@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 
 import styles from './index.module.scss';
 
+// TODO: import Logo from './img/tomato.png + additional.d.ts (telegram)
 const Header = () => {
   return (
     <header className={styles.header}>

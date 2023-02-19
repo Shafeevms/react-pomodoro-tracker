@@ -1,4 +1,5 @@
 import styles from './index.module.css';
+import menuBtn from './menubutton.png';
 
 
 interface IMenuButton {
@@ -8,7 +9,7 @@ interface IMenuButton {
 const MenuButton = ({ onClick }: IMenuButton) => {
   return (
     <button className={styles.button} onClick={onClick}>
-      <img src={'/img/menubutton.png'}/>
+      <img src={menuBtn}/>
     </button>
   );
 };

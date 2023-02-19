@@ -1,11 +1,11 @@
-import TIMER from '../TIMER';
-import Todos from '../Todos';
+import Timer from '../../Components/Timer';
+import Todos from '../../Components/Todos';
 
 import styles from './index.module.scss';
 
 const Tracker = () => {
   return (
-    <div className={styles.traker}>
+    <div className={styles.tracker}>
       <section>
         <h2>Ура! Теперь можно начать работать:</h2>
         <ul>
@@ -21,7 +21,7 @@ const Tracker = () => {
         <Todos/>
       </section>
       <section>
-        <TIMER/>
+        <Timer/>
       </section>
     </div>
   );

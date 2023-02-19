@@ -1,19 +1,19 @@
 import Header from './Components/Header';
 import { Route, Routes } from 'react-router-dom';
-import Tracker from './Components/Tracker';
-import Statistics from './Components/Statistics';
-import ErrorPage from './Components/404';
+import Tracker from './pages/Tracker';
+import Statistics from './pages/Statistics';
+import ErrorPage from './pages/404';
 
-function App() {
+const App = () => {
   return (
-    <div>
-    <Header/>
+    <>
+      <Header/>
       <Routes>
         <Route path='/' element={<Tracker/>}/>
         <Route path='statistics' element={<Statistics/>}/>
         <Route path='*' element={<ErrorPage/>}/>
       </Routes>
-    </div>
+    </>
   );
 }
 
