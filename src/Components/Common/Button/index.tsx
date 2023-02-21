@@ -6,7 +6,8 @@ import styles from './index.module.scss';
 interface IButton {
   text: string,
   className?: string,
-  view?: 'green' | 'gray'| 'red' | 'modalRed'
+  view?: 'green' | 'gray'| 'red' | 'modalRed',
+  onClick?: () => void,
 }
 
 const Index = ({ text, className, view = 'green' }:IButton) => {
