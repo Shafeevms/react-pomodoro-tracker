@@ -21,7 +21,8 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "src"
+    "src",
+    "additional.d.ts"
   ],
   "types": ["@types/node", "@types/react", "@types/react-dom", "@types/jest", "@types/testing-library__react"]
 }

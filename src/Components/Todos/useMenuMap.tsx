@@ -1,10 +1,10 @@
-import plus from '../Components/Todos/img/plus.svg';
-import minus from '../Components/Todos/img/minus.svg';
-import edit from '../Components/Todos/img/edit.svg';
-import del from '../Components/Todos/img/delete.svg';
-import { useAppDispatch } from '../store/hooks';
-import { deleteTodo, plusTomato, minusTomato, divIsEditable } from '../Components/Todos/todosSlice';
+import { useAppDispatch } from '../../store/hooks';
+import { deleteTodo, plusTomato, minusTomato, setEditable } from './todosSlice';
 
+import plus from './img/plus.svg';
+import minus from './img/minus.svg';
+import edit from './img/edit.svg';
+import del from './img/delete.svg';
 
 export interface IMenuMap {
   name: string,
@@ -17,10 +17,8 @@ interface IUseMenuMap {
 }
 
 export const useMenuMap = ({ id }: IUseMenuMap): IMenuMap[] => {
-  const makeDivEditable = () => {
-
-  }
   const dispatch = useAppDispatch();
+
   return [
     {
       img: plus,
@@ -35,7 +33,7 @@ export const useMenuMap = ({ id }: IUseMenuMap): IMenuMap[] => {
     {
       img: edit,
       name: 'Редактировать',
-      action: () => dispatch((divIsEditable(id))),
+      action: () => dispatch((setEditable({ id, isEditable: true }))),
     },
     {
       img: del,
@@ -44,10 +42,3 @@ export const useMenuMap = ({ id }: IUseMenuMap): IMenuMap[] => {
     }
   ];
 };
-
-export default useMenuMap;
-
-
-
-
-

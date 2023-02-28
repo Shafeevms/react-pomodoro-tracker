@@ -2,16 +2,16 @@ import styles from './index.module.scss';
 
 interface IDropDownMenuItem {
   img: string,
-  name: string,
+  title: string,
   action: any,
 }
 
-const DropDownMenuItem = ({ img, action, name }: IDropDownMenuItem) => {
+const DropDownMenuItem = ({ img, action, title }: IDropDownMenuItem) => {
 
   return (
     <li className={styles.dropItem} onClick={action}>
-      <img className={styles.dropItem__img} src={img} alt={name}/>
-      <h2>{name}</h2>
+      <img className={styles.dropItem__img} src={img} alt={title}/>
+      <h2>{title}</h2>
     </li>
   );
 };

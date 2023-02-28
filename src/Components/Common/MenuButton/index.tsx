@@ -1,7 +1,6 @@
 import styles from './index.module.css';
 import menuBtn from './menubutton.png';
 
-
 interface IMenuButton {
   onClick: () => void,
 }

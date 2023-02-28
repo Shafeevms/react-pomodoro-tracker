@@ -10,10 +10,9 @@ interface IButton {
   onClick?: () => void,
 }
 
-const Index = ({ text, className, view = 'green' }:IButton) => {
-
+const Index = ({ text, className, view = 'green', onClick }: IButton) => {
   return (
-    <button className={clsx(styles.button, styles[view], className)}>
+    <button className={clsx(styles.button, styles[view], className)} onClick={onClick}>
       {text}
     </button>
   );

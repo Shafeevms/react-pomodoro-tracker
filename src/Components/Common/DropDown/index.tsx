@@ -1,15 +1,9 @@
 import MenuButton from '../MenuButton';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import DropDownItem from './DropDownItem';
 
 import styles from './index.module.scss';
-
-
-export interface IDropDownItem {
-  name: string,
-  action: () => void,
-  img: string,
-}
+import { IDropDownItem, isNode } from './types';
 
 interface IDropDown {
   menu: IDropDownItem[],
@@ -24,7 +18,12 @@ const DropDown = ({ menu }: IDropDown) => {
   };
 
   const handleOutsideClick = (event: MouseEvent) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+    const { current } = dropdownRef;
+    if (!current) {
+      return;
+    }
+
+    if (isNode(event.target) && !current.contains(event.target)) {
       setIsMenuOpen(false);
     }
   };
@@ -41,7 +40,14 @@ const DropDown = ({ menu }: IDropDown) => {
       <MenuButton onClick={openMenuHandler}/>
       {isMenuOpen &&
         <ul className={styles.dropDown}>
-          {menu && menu.map(item => <DropDownItem key={item.name} img={item.img} name={item.name} action={item.action}/>)}
+          {menu.map(item => (
+            <DropDownItem
+              key={item.name}
+              img={item.img}
+              title={item.name}
+              action={item.action}
+            />
+          ))}
         </ul>
       }
     </div>

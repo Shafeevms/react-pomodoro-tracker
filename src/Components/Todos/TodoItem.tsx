@@ -1,24 +1,24 @@
 import { FocusEvent, KeyboardEvent, SyntheticEvent, useEffect, useRef, useState } from 'react';
 import { useAppDispatch } from '../../store/hooks';
-import { divIsNotEditable, editTodo, ITodo } from './todosSlice';
-import useMenuMap from '../../hooks/useMenuMap';
+import { setEditable, editTodo, ITodo } from './todosSlice';
+import { useMenuMap } from './useMenuMap';
 
 import DropDown from '../Common/DropDown';
 
 import styles from './index.module.scss';
 
-
 interface ITodoItem {
   todoElement: ITodo,
 }
 
-const TodoItem = ({ todoElement }: ITodoItem) => {
-  const { todo, tomatoes, id, editable } = todoElement;
-  const menuMap = useMenuMap({ id });
-  const [text, setText] = useState(todo);
+const TodoItem = ({ todoElement: { todo, tomatoes, id, editable } }: ITodoItem) => {
+  const dispatch = useAppDispatch();
+
   const divRef = useRef<HTMLDivElement>(null);
 
-  const dispatch = useAppDispatch();
+  const [text, setText] = useState(todo);
+
+  const menuMap = useMenuMap({ id });
 
   useEffect(() => {
     if (editable && divRef.current) {
@@ -30,7 +30,7 @@ const TodoItem = ({ todoElement }: ITodoItem) => {
   const handleBlur = (event: FocusEvent<HTMLDivElement>) => {
     if (event.target?.innerText) {
       dispatch(editTodo({ id, todo: event.target.innerText }));
-      dispatch(divIsNotEditable(id));
+      dispatch(setEditable({ id, isEditable: false }));
     }
   };
 
@@ -38,7 +38,7 @@ const TodoItem = ({ todoElement }: ITodoItem) => {
     if (event.code === 'Enter') {
       const target = event.target as HTMLDivElement;
       dispatch(editTodo({ id, todo: target?.innerText }));
-      dispatch(divIsNotEditable(id));
+      dispatch(setEditable({ id, isEditable: true }));
     }
   };
 
@@ -58,8 +58,7 @@ const TodoItem = ({ todoElement }: ITodoItem) => {
         dangerouslySetInnerHTML={{ __html: text }}
         onInput={handleInputChange}
         className={styles.item__todo}
-      >
-      </div>
+      />
       <DropDown menu={menuMap}/>
     </li>
   );

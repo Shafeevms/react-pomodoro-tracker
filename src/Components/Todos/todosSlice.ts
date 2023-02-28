@@ -10,53 +10,36 @@ export interface ITodo {
   editable: boolean,
 }
 
-const initialState: ITodo[] = [];
+const initialState: Record<string, ITodo> = {};
 
 export const todosSlice = createSlice({
   name: 'todos',
   initialState,
   reducers: {
     add: (state, action: PayloadAction<ITodo>) => {
-      state.push(action.payload);
+      const { id } = action.payload;
+      state[id] = action.payload;
     },
     deleteTodo: (state, action: PayloadAction<string>) => {
-      return state.filter(todo => todo.id !== action.payload);
+      delete state[action.payload];
     },
     plusTomato: (state, action: PayloadAction<string>) => {
-      const todoIndex = state.findIndex(todo => todo.id === action.payload);
-      if (todoIndex !== -1) {
-        const updatedTodo = { ...state[todoIndex], tomatoes: state[todoIndex].tomatoes + 1 };
-        state[todoIndex] = updatedTodo;
+      if (state[action.payload].tomatoes < 4) {
+        state[action.payload].tomatoes += 1;
       }
     },
     minusTomato: (state, action: PayloadAction<string>) => {
-      const todoIndex = state.findIndex(todo => todo.id === action.payload);
-      if (todoIndex !== -1) {
-        const updatedTodo = { ...state[todoIndex], tomatoes: state[todoIndex].tomatoes - 1 };
-        state[todoIndex] = updatedTodo;
+      if (state[action.payload].tomatoes > 0) {
+        state[action.payload].tomatoes -= 1;
       }
     },
-    divIsEditable: (state, action: PayloadAction<string>) => {
-      const todoIndex = state.findIndex(todo => todo.id === action.payload);
-      if (todoIndex !== -1) {
-        const updatedTodo = { ...state[todoIndex], editable: true };
-        state[todoIndex] = updatedTodo;
-      }
-    },
-    divIsNotEditable: (state, action: PayloadAction<string>) => {
-      const todoIndex = state.findIndex(todo => todo.id === action.payload);
-      if (todoIndex !== -1) {
-        const updatedTodo = { ...state[todoIndex], editable: false };
-        state[todoIndex] = updatedTodo;
-      }
+    setEditable: (state, action: PayloadAction<{ id: string, isEditable: boolean }>) => {
+      const { id, isEditable } = action.payload;
+      state[id].editable = isEditable;
     },
     editTodo: (state, action: PayloadAction<{ todo: string, id: string }>) => {
       const { id, todo } = action.payload;
-      const todoIndex = state.findIndex(todo => todo.id === id);
-      if (todoIndex !== -1) {
-        const updatedTodo = { ...state[todoIndex], todo };
-        state[todoIndex] = updatedTodo;
-      }
+      state[id].todo = todo;
     }
   }
 });
@@ -66,9 +49,8 @@ export const {
   deleteTodo,
   plusTomato,
   minusTomato,
-  divIsEditable,
-  divIsNotEditable,
   editTodo,
+  setEditable,
 } = todosSlice.actions;
 
 export const addTodo = (inputValue: string) => {
@@ -87,7 +69,6 @@ export const addTodo = (inputValue: string) => {
   };
 };
 
-
-export const selectTodos = (state: RootState) => state.todos;
+export const selectTodos = (state: RootState) => Object.values(state.todos);
 
 export default todosSlice.reducer;
