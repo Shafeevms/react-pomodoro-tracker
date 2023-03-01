@@ -39,13 +39,14 @@ const DropDown = ({ menu }: IDropDown) => {
     <div ref={dropdownRef}>
       <MenuButton onClick={openMenuHandler}/>
       {isMenuOpen &&
-        <ul className={styles.dropDown}>
+        <ul className={styles.dropDown} data-testid='menu'>
           {menu.map(item => (
             <DropDownItem
               key={item.name}
               img={item.img}
               title={item.name}
               action={item.action}
+              testId={item.testId}
             />
           ))}
         </ul>

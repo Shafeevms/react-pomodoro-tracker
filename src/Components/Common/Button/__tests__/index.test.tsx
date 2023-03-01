@@ -31,7 +31,7 @@ describe('Button', () => {
     expect(button).toHaveClass('testClass');
   });
 
-  it('calls eventhandler when clicked', () => {
+  it('calls eventHandler when clicked', () => {
     const handleClick = jest.fn();
     render(<Button text={'click me'} onClick={handleClick}/>);
 

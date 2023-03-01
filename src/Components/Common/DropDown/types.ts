@@ -2,6 +2,7 @@ export interface IDropDownItem {
   name: string,
   action: () => void,
   img: string,
+  testId?: string,
 }
 
 export const isNode = (eventTarget: unknown): eventTarget is Node => {

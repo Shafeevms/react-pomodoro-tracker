@@ -4,12 +4,13 @@ interface IDropDownMenuItem {
   img: string,
   title: string,
   action: any,
+  testId?: string,
 }
 
-const DropDownMenuItem = ({ img, action, title }: IDropDownMenuItem) => {
+const DropDownMenuItem = ({ img, action, title, testId }: IDropDownMenuItem) => {
 
   return (
-    <li className={styles.dropItem} onClick={action}>
+    <li className={styles.dropItem} onClick={action} data-testid={testId}>
       <img className={styles.dropItem__img} src={img} alt={title}/>
       <h2>{title}</h2>
     </li>
