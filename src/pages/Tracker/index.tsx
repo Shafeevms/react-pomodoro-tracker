@@ -1,4 +1,4 @@
-import Timer from '../../Components/Timer';
+import TimerSection from '../../Components/TimerSection';
 import Todos from '../../Components/Todos';
 
 import styles from './index.module.scss';
@@ -21,7 +21,7 @@ const Tracker = () => {
         <Todos/>
       </section>
       <section>
-        <Timer/>
+        <TimerSection/>
       </section>
     </div>
   );

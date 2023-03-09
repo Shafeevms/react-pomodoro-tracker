@@ -1,11 +1,12 @@
 import { FocusEvent, KeyboardEvent, SyntheticEvent, useEffect, useRef, useState } from 'react';
 import { useAppDispatch } from '../../store/hooks';
-import { setEditable, editTodo, ITodo } from './todosSlice';
+import { editTodo, ITodo, setEditable } from './todosSlice';
 import { useMenuMap } from './useMenuMap';
 
 import DropDown from '../Common/DropDown';
 
 import styles from './index.module.scss';
+
 
 interface ITodoItem {
   todoElement: ITodo,

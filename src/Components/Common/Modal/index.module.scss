@@ -1,0 +1,43 @@
+@import "../../../index";
+
+.mat {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: $modal-mat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+}
+
+.modal {
+  position: relative;
+  padding: 25px 85px;
+  height: 175px;
+  width: 350px;
+  background-color: $white;
+  z-index: 100;
+
+  &__title {
+    margin-bottom: 25px;
+    font-weight: 400;
+    font-size: 24px;
+  }
+
+  &__btnAbort {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid $medium-gray;
+  }
+
+  &__btnCorner {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    height: 17px;
+    width: 17px;
+  }
+}

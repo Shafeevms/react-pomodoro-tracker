@@ -1,10 +1,12 @@
 import { useAppDispatch } from '../../store/hooks';
-import { deleteTodo, plusTomato, minusTomato, setEditable } from './todosSlice';
+import { minusTomato, plusTomato, setEditable } from './todosSlice';
 
 import plus from './img/plus.svg';
 import minus from './img/minus.svg';
 import edit from './img/edit.svg';
 import del from './img/delete.svg';
+import { isOpen } from '../Common/Modal/modalSlice';
+
 
 export interface IMenuMap {
   name: string,
@@ -38,7 +40,9 @@ export const useMenuMap = ({ id }: IUseMenuMap): IMenuMap[] => {
     {
       img: del,
       name: 'Удалить',
-      action: () => dispatch(deleteTodo(id))
+      action: () => dispatch(isOpen({ isModalOpen: true, id }))
     }
   ];
 };
+
+//action: () => dispatch(deleteTodo(id))

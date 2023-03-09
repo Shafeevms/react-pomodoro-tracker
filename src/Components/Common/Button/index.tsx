@@ -1,13 +1,14 @@
 import clsx from 'clsx';
 
 import styles from './index.module.scss';
+import { ThunkAction } from '@reduxjs/toolkit';
 
 
-interface IButton {
+export interface IButton {
   text: string,
   className?: string,
   view?: 'green' | 'gray'| 'red' | 'modalRed',
-  onClick?: () => void,
+  onClick?: any, //TODO
 }
 
 const Index = ({ text, className, view = 'green', onClick }: IButton) => {

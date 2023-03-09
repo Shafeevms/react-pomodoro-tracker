@@ -11,6 +11,7 @@ interface IDropDown {
 
 const DropDown = ({ menu }: IDropDown) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const openMenuHandler = () => {

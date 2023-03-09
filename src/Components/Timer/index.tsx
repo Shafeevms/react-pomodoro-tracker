@@ -1,12 +1,10 @@
-import Header from './header';
-
-import styles from './index.module.scss'
-
 const Timer = () => {
+  const min = '25';
+  const sec = '00';
   return (
-    <div className={styles.timer}>
-      <Header/>
-    </div>
+    <>
+      {min}:{sec}
+    </>
   );
 };
 

@@ -1,0 +1,31 @@
+@import "../../index";
+
+.timer {
+  height: 507px;
+  background-color: $medium-gray;
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: 90px 150px 40px 55px 55px 1fr;
+  }
+  &__clocks {
+    grid-column: 4 / 8;
+    grid-row: 2 / 3;
+    font-size: 150px;
+    font-weight: 200;
+  }
+  &__buttonGroup {
+    grid-column: 4 / 10;
+    grid-row: 4 / 5;
+    display: flex;
+    justify-content: space-evenly;
+  }
+}
+
+.header {
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  background-color: $dark-gray;
+  color: $white;
+}

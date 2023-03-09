@@ -71,4 +71,16 @@ export const addTodo = (inputValue: string) => {
 
 export const selectTodos = (state: RootState) => Object.values(state.todos);
 
+export const selectTotalTomatoes = (state: RootState) => {
+  const TIME_FOR_TOMATO = 25;
+  const totalTomatoes = Object
+    .values(state.todos)
+    .reduce((acc, todo) => {
+    return acc += todo.tomatoes;
+  }, 0);
+  return TIME_FOR_TOMATO * totalTomatoes;
+};
+
+export const selectCurrentTodo = (state: RootState) => Object.values(state.todos)[0];
+
 export default todosSlice.reducer;

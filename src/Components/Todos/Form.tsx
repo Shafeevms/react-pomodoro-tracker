@@ -1,26 +1,26 @@
-import React, { useState, SyntheticEvent, ChangeEvent } from 'react';
+import React, { ChangeEvent, SyntheticEvent, useState } from 'react';
 import { useAppDispatch } from '../../store/hooks';
-import { nanoid } from 'nanoid';
-import { addTodo, ITodo } from './todosSlice';
+import { addTodo } from './todosSlice';
 
 import Button from '../Common/Button';
 
 import styles from './index.module.scss';
+
 
 const Form = () => {
   const dispatch = useAppDispatch();
   const [inputValue, setInputValue] = useState('');
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value)
-  }
+    setInputValue(event.target.value);
+  };
 
   const handleSubmit = (event: SyntheticEvent) => {
     event.preventDefault();
 
     dispatch(addTodo(inputValue));
     setInputValue('');
-  }
+  };
 
   return (
     <form
@@ -29,11 +29,11 @@ const Form = () => {
     >
       <input
         className={styles.form__input}
-        placeholder='Название задачи'
+        placeholder="Название задачи"
         value={inputValue}
         onChange={handleChange}
       />
-      <Button text='Добавить' className={styles.form__button}/>
+      <Button text="Добавить" className={styles.form__button}/>
     </form>
   );
 };
