@@ -5,7 +5,7 @@ import plus from './img/plus.svg';
 import minus from './img/minus.svg';
 import edit from './img/edit.svg';
 import del from './img/delete.svg';
-import { isOpen } from '../Common/Modal/modalSlice';
+import { toggleModal } from '../Common/Modal/modalSlice';
 
 
 export interface IMenuMap {
@@ -40,7 +40,7 @@ export const useMenuMap = ({ id }: IUseMenuMap): IMenuMap[] => {
     {
       img: del,
       name: 'Удалить',
-      action: () => dispatch(isOpen({ isModalOpen: true, id }))
+      action: () => dispatch(toggleModal({ isModalOpen: true, id }))
     }
   ];
 };

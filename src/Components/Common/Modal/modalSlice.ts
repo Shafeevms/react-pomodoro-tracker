@@ -13,18 +13,25 @@ export const modalSlice = createSlice({
   name: 'modal',
   initialState,
   reducers: {
-    isOpen: (state, action: PayloadAction<IModal>) => {
-      const { isModalOpen, id} = action.payload;
+    toggleModal: (state, action: PayloadAction<IModal>) => {
+      const { isModalOpen, id } = action.payload;
       state.isModalOpen = isModalOpen;
       state.id = id;
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase('todos/deleteTodo', (state) => {
+        state.isModalOpen = false;
+        state.id = '';
+      });
   }
 });
 
 export const {
-  isOpen
+  toggleModal
 } = modalSlice.actions;
 
 export const selectModal = (state: RootState) => state.modal;
 
-export default  modalSlice.reducer;
+export default modalSlice.reducer;

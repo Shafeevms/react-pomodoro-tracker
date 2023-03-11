@@ -3,7 +3,7 @@ import { deleteTodo, selectTodos, selectTotalTomatoes } from './todosSlice';
 
 import Form from './Form';
 import TodoItem from './TodoItem';
-import { isOpen, selectModal } from '../Common/Modal/modalSlice';
+import { selectModal, toggleModal } from '../Common/Modal/modalSlice';
 import Modal from '../Common/Modal';
 import Button from '../Common/Button';
 
@@ -32,8 +32,7 @@ const Todos = () => {
         <
           Modal
           title="Удалить задачу"
-          button={<Button text="Удалить" onClick={dispatch(deleteTodo(id))}/>}
-          onClose={dispatch(isOpen({ isModalOpen: false, id }))}
+          button={<Button view='red' text="Удалить" className='mb10' onClick={() => dispatch(deleteTodo(id))}/>}
         />
       }
     </>
@@ -41,3 +40,4 @@ const Todos = () => {
 };
 
 export default Todos;
+

@@ -15,6 +15,9 @@
 
 .modal {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 25px 85px;
   height: 175px;
   width: 350px;
@@ -39,5 +42,7 @@
     right: 12px;
     height: 17px;
     width: 17px;
+    background: transparent;
+    border: none;
   }
 }

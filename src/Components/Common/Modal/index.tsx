@@ -7,7 +7,7 @@ import { ReactNode } from 'react';
 interface IModal {
   title: string,
   button: ReactNode,
-  onClose: any, //TODO
+  onClose?: () => void,
 }
 
 
@@ -18,11 +18,12 @@ const Modal = ({ title, button, onClose }: IModal) => {
   return createPortal(
     <div className={styles.mat} onClick={onClose}>
       <div className={styles.modal}>
-        <button className={styles.modal__btnAbort} onClick={onClose}>
+        <button className={styles.modal__btnCorner} onClick={onClose}>
           <img src={btnClose}/>
         </button>
-        <h3>{title}</h3>
+        <h3 className={styles.modal__title}>{title}</h3>
         {button}
+        <button className={styles.modal__btnAbort}>Отменить</button>
       </div>
     </div>, modal
   );
