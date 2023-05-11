@@ -1,6 +1,7 @@
 @import "../../index";
 
 .timer {
+  position: relative;
   height: 507px;
   background-color: $medium-gray;
   &__grid {

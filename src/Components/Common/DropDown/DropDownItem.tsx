@@ -3,7 +3,7 @@ import styles from './index.module.scss';
 interface IDropDownMenuItem {
   img: string,
   title: string,
-  action: any, //TODO: какой-то здесь другой должен быть
+  action: () => void,
   testId?: string,
 }
 
