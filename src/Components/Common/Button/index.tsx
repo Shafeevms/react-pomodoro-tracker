@@ -6,7 +6,7 @@ import styles from './index.module.scss';
 export interface IButton {
   text: string,
   className?: string,
-  view?: 'green' | 'gray' | 'red' | 'modalRed',
+  view?: 'green' | 'gray' | 'red' | 'modalRed' | 'grayRound',
   onClick?: () => void,
 }
 

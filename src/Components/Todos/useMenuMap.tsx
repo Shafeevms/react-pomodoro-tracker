@@ -45,4 +45,3 @@ export const useMenuMap = ({ id }: IUseMenuMap): IMenuMap[] => {
   ];
 };
 
-//action: () => dispatch(deleteTodo(id))

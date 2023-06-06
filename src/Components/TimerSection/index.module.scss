@@ -21,6 +21,11 @@
     display: flex;
     justify-content: space-evenly;
   }
+  &__addBtn {
+    position: absolute;
+    right: 11%;
+    top: 38%;
+  }
 }
 
 .header {
