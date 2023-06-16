@@ -1,35 +1,63 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import clsx from 'clsx';
 
-const TIMER_DISTANCE = 25 * 60;
+import styles from './index.module.scss';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { minusTomato, selectCurrentTodo } from '../Todos/todosSlice';
+import { expired } from '../TimerSection/timerSectionSlice';
+
 const ONE_MINUTE = 60;
 const ONE_SECOND = 1;
 
-export interface ITimer {
-  status: 'started' | 'paused' | 'idle',
+const countDown = (seconds: number) => {
+  const remainMinutes = Math.floor(seconds / ONE_MINUTE);
+  const remainSeconds = Math.floor((seconds % ONE_MINUTE) / ONE_SECOND);
+
+  return {
+    remainMinutes,
+    remainSeconds
+  }
 }
 
-const Timer = ({ status }: ITimer) => {
-  const [count, setCount] = useState(TIMER_DISTANCE);
-  const timerRef = useRef(count);
+export interface ITimer {
+  status: 'started' | 'paused' | 'idle',
+  countDownPeriod: number,
+}
 
-  const countDown = () => {
-    const remainMinutes = Math.floor(timerRef.current / ONE_MINUTE);
-    const remainSeconds = Math.floor((timerRef.current % ONE_MINUTE) / ONE_SECOND);
-    // setCount(timerRef.current -1);
+const Timer = ({ status, countDownPeriod }: ITimer) => {
+  const [count, setCount] = useState(countDownPeriod);
+  const [isTimerRunning, setIsTimerRunning] = useState(false);
+  const timerRef = useRef<NodeJS.Timer>();
+  const dispatch = useAppDispatch();
 
-    return {
-      remainMinutes,
-      remainSeconds
+  useEffect(() => {
+    if (status === 'started') {
+      timerRef.current = setInterval(() => {
+        setCount(prevCount => prevCount - 1);
+      }, 1000);
+      if (count === 0) {
+        clearInterval(timerRef.current);
+        dispatch(expired());
+      }
     }
-  }
 
-  const { remainMinutes, remainSeconds } = countDown();
+    if (status === 'idle') {
+      setCount(countDownPeriod);
+    }
+
+    return () => {
+      clearInterval(timerRef.current);
+    }
+  }, [status, count])
+
+
+  const { remainMinutes, remainSeconds } = countDown(count);
 
   return (
-    <>
+    <div className={clsx(status === 'started' && styles.red)}>
       {remainMinutes < 10 ? `0${remainMinutes}` : remainMinutes}:
       {remainSeconds < 10 ? `0${remainSeconds}` : remainSeconds}
-    </>
+    </div>
   );
 };
 

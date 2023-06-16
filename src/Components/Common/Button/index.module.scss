@@ -45,10 +45,11 @@
   color: #DC3E22;
   background-color: transparent;
   border: 2px solid #DC3E22;
-  transition: background-color 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 
   &:hover {
     background-color: #DC3E22;
+    color: #FFFFFF;
   }
 }
 

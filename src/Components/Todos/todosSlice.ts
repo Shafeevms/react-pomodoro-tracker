@@ -2,7 +2,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppDispatch, RootState } from '../../store/store';
 import { nanoid } from 'nanoid';
 
-
 export interface ITodo {
   id: string,
   todo: string,
@@ -29,7 +28,7 @@ export const todosSlice = createSlice({
       }
     },
     minusTomato: (state, action: PayloadAction<string>) => {
-      if (state[action.payload].tomatoes > 0) {
+      if (state[action.payload].tomatoes > 1) {
         state[action.payload].tomatoes -= 1;
       }
     },
