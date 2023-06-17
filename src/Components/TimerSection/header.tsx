@@ -5,16 +5,17 @@ import clsx from 'clsx';
 import styles from './index.module.scss';
 
 interface IHeader {
-    view: 'tomato' | 'gray' | 'green'
+    view: 'tomato' | 'gray' | 'green',
+    status: 'started' | 'paused' | 'idle' | 'interval',
 }
 
-const Header = ({ view }: IHeader) => {
+const Header = ({ view, status }: IHeader) => {
   const currentTodo = useAppSelector(selectCurrentTodo);
 
   return (
     <header className={clsx(styles.header, styles[view])}>
       <h3>{currentTodo?.todo || 'Нет задач'}</h3>
-      <h3>{currentTodo?.todo ? `Помидор ${currentTodo?.tomatoes}`: ''}</h3>
+      <h3>{status === 'interval' ? `Пауза ${currentTodo?.tomatoes}` : `Помидор ${currentTodo?.tomatoes}`}</h3>
     </header>
   );
 };

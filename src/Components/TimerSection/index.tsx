@@ -4,7 +4,7 @@ import Button from '../Common/Button';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
 import styles from './index.module.scss';
-import { pause, reset, selectDefaultTimer, start } from './timerSectionSlice';
+import { pause, pauseInterval, plusMin, reset, selectDefaultTimer, start } from './timerSectionSlice';
 import { selectCurrentTodo } from '../Todos/todosSlice';
 
 
@@ -34,6 +34,9 @@ const TimerSection = () => {
       case 'started':
         dispatch(pause());
         break;
+      case 'interval':
+        dispatch(pauseInterval());
+        break;
       default:
         return;
     }
@@ -50,16 +53,18 @@ const TimerSection = () => {
     }
   }
 
+  const plusBtnClickHandler = () => dispatch(plusMin())
+
 
   return (
     <div className={styles.timer}>
-      <Header view={headerColor}/>
+      <Header view={headerColor} status={timerStatus}/>
       <div className={styles.timer__grid}>
         <div className={styles.timer__clocks}>
           <Timer status={timerStatus} countDownPeriod={countDownPeriod}/>
         </div>
         <div className={styles.timer__addBtn}>
-          <Button text="+" view="grayRound"/>
+          <Button text="+" view="grayRound" onClick={plusBtnClickHandler}/>
         </div>
         <div className={styles.timer__buttonGroup}>
           <Button text={firstButtonText} view={firstBtnView} onClick={firstBtnClickHandler}/>

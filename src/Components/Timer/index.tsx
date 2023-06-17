@@ -2,8 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
 
 import styles from './index.module.scss';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { minusTomato, selectCurrentTodo } from '../Todos/todosSlice';
+import { useAppDispatch } from '../../store/hooks';
 import { expired } from '../TimerSection/timerSectionSlice';
 
 const ONE_MINUTE = 60;
@@ -20,7 +19,7 @@ const countDown = (seconds: number) => {
 }
 
 export interface ITimer {
-  status: 'started' | 'paused' | 'idle',
+  status: 'started' | 'paused' | 'idle' | 'interval',
   countDownPeriod: number,
 }
 
@@ -31,6 +30,12 @@ const Timer = ({ status, countDownPeriod }: ITimer) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    setCount(countDownPeriod)
+  }, [countDownPeriod, status])
+
+
+  useEffect(() => {
+
     if (status === 'started') {
       timerRef.current = setInterval(() => {
         setCount(prevCount => prevCount - 1);
@@ -40,9 +45,17 @@ const Timer = ({ status, countDownPeriod }: ITimer) => {
         dispatch(expired());
       }
     }
+// пришлось сделать такую же функцию  - если сделать if (status === 'started' || status === 'interval')  не работает
+    // объясни почему так?
 
-    if (status === 'idle') {
-      setCount(countDownPeriod);
+    if (status === 'interval') {
+      timerRef.current = setInterval(() => {
+        setCount(prevCount => prevCount - 1);
+      }, 1000);
+      if (count === 0) {
+        clearInterval(timerRef.current);
+        dispatch(expired());
+      }
     }
 
     return () => {
