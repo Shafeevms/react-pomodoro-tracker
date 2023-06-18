@@ -6,7 +6,7 @@ import styles from './index.module.scss';
 
 interface IHeader {
     view: 'tomato' | 'gray' | 'green',
-    status: 'started' | 'paused' | 'idle' | 'interval',
+    status: 'started' | 'paused' | 'idle' | 'interval' | 'pausedInterval',
 }
 
 const Header = ({ view, status }: IHeader) => {

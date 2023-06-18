@@ -1,11 +1,11 @@
 import { IButton } from '../Common/Button';
 import { createSlice } from '@reduxjs/toolkit';
 import { AppDispatch, RootState } from '../../store/store';
-import { minusTomato } from '../Todos/todosSlice';
+import { deleteTodo, minusTomato } from '../Todos/todosSlice';
 
 export interface ITimerSection {
   headerColor: 'gray' | 'green' | 'tomato',
-  timerStatus: 'started' | 'paused' | 'idle' | 'interval',
+  timerStatus: 'started' | 'paused' | 'idle' | 'interval' | 'pausedInterval',
   countDownPeriod: number,
   firstButtonText: 'Старт' | 'Пауза' | 'Продолжить',
   firstButtonView: Pick<IButton, 'view'>,
@@ -42,9 +42,16 @@ export const timerSectionSlice = createSlice({
       state.secondButtonText = 'Сделано';
     },
     pauseInterval: (state) => {
-      state.timerStatus = 'paused';
+      state.timerStatus = 'pausedInterval';
       state.firstButtonText = 'Продолжить';
       state.secondButtonText = 'Пропустить';
+    },
+    resumeInterval: (state) => {
+      state.timerStatus = 'interval';
+      state.headerColor = 'green';
+      state.firstButtonText = 'Пауза';
+      state.secondButtonText = 'Пропустить';
+      state.secondButtonView = { view: 'border-red' };
     },
     fiveMinInterval: (state) => {
       state.timerStatus = 'interval';
@@ -54,15 +61,23 @@ export const timerSectionSlice = createSlice({
       state.secondButtonText = 'Пропустить';
       state.secondButtonView = { view: 'border-red' };
     },
+    secondTick: (state) => {
+      state.countDownPeriod -= 1;
+    },
     reset: () => initialState,
     plusMin: (state) => {
-      console.log(1)
       state.countDownPeriod = state.countDownPeriod + 60;
     },
     expired: (state) => {
       // мне нужен стейт todos...
-    }
-  }
+    },
+  },
+  // extraReducers: builder => {
+  //   builder
+  //     .addCase('timer/pause', (state) => {
+  //
+  //     })
+  // }
 });
 
 export const {
@@ -72,6 +87,8 @@ export const {
   fiveMinInterval,
   plusMin,
   pauseInterval,
+  secondTick,
+  resumeInterval,
 } = timerSectionSlice.actions;
 
 export const expired = () => {
@@ -79,12 +96,34 @@ export const expired = () => {
     const { id, tomatoes } = Object.values(getState().todos)[0];
     const { timerStatus } = getState().timer;
 
-    if (tomatoes > 1 && timerStatus === 'started') {
-      // start 5 min interval;
-      dispatch(fiveMinInterval())
-      // current tomatoes - 1;
-      dispatch(minusTomato(id));
+    if (tomatoes === 1) {
+      if (timerStatus === 'started') {
+        dispatch(reset());
+        dispatch(deleteTodo(id));
+      }
+      if (timerStatus === 'interval') {
+        dispatch(reset());
+        dispatch(start());
+      }
     }
+
+    if (tomatoes > 1) {
+      if (timerStatus === 'started') {
+        dispatch(fiveMinInterval());
+        dispatch(minusTomato(id));
+      }
+    }
+  }
+};
+
+export const tick = () => {
+  return (dispatch: AppDispatch, getState: () => RootState) => {
+    const { countDownPeriod } = getState().timer;
+    if (countDownPeriod === 0) {
+      dispatch(expired());
+      return;
+    }
+    dispatch(secondTick());
   }
 }
 

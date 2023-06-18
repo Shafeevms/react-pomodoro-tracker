@@ -3,10 +3,19 @@ import Timer from '../Timer';
 import Button from '../Common/Button';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 
-import styles from './index.module.scss';
-import { pause, pauseInterval, plusMin, reset, selectDefaultTimer, start } from './timerSectionSlice';
+import {
+  expired,
+  pause,
+  pauseInterval,
+  plusMin,
+  reset,
+  resumeInterval,
+  selectDefaultTimer,
+  start
+} from './timerSectionSlice';
 import { selectCurrentTodo } from '../Todos/todosSlice';
 
+import styles from './index.module.scss';
 
 const TimerSection = () => {
 
@@ -37,6 +46,9 @@ const TimerSection = () => {
       case 'interval':
         dispatch(pauseInterval());
         break;
+      case 'pausedInterval':
+        dispatch(resumeInterval());
+        break;
       default:
         return;
     }
@@ -48,12 +60,20 @@ const TimerSection = () => {
       case 'started':
         dispatch(reset());
         break;
+      case 'paused':
+        dispatch(expired());
+        break;
       default:
         return;
     }
   }
 
-  const plusBtnClickHandler = () => dispatch(plusMin())
+  const plusBtnClickHandler = () => {
+    if (!currentTodo) {
+      return;
+    }
+    dispatch(plusMin());
+  }
 
 
   return (

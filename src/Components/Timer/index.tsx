@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
 
-import styles from './index.module.scss';
 import { useAppDispatch } from '../../store/hooks';
-import { expired } from '../TimerSection/timerSectionSlice';
+import { tick } from '../TimerSection/timerSectionSlice';
+
+import styles from './index.module.scss';
 
 const ONE_MINUTE = 60;
 const ONE_SECOND = 1;
@@ -19,55 +20,52 @@ const countDown = (seconds: number) => {
 }
 
 export interface ITimer {
-  status: 'started' | 'paused' | 'idle' | 'interval',
+  status: 'started' | 'paused' | 'idle' | 'interval' | 'pausedInterval',
   countDownPeriod: number,
 }
 
 const Timer = ({ status, countDownPeriod }: ITimer) => {
-  const [count, setCount] = useState(countDownPeriod);
-  const [isTimerRunning, setIsTimerRunning] = useState(false);
+  const [view, setView] = useState('default');
   const timerRef = useRef<NodeJS.Timer>();
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    setCount(countDownPeriod)
-  }, [countDownPeriod, status])
-
-
-  useEffect(() => {
-
-    if (status === 'started') {
+    console.log(status)
+    if (status === 'started' || status === 'interval') {
       timerRef.current = setInterval(() => {
-        setCount(prevCount => prevCount - 1);
+        dispatch(tick());
       }, 1000);
-      if (count === 0) {
-        clearInterval(timerRef.current);
-        dispatch(expired());
-      }
-    }
-// пришлось сделать такую же функцию  - если сделать if (status === 'started' || status === 'interval')  не работает
-    // объясни почему так?
-
-    if (status === 'interval') {
-      timerRef.current = setInterval(() => {
-        setCount(prevCount => prevCount - 1);
-      }, 1000);
-      if (count === 0) {
-        clearInterval(timerRef.current);
-        dispatch(expired());
-      }
     }
 
+    if (status === 'paused'
+      || status === 'idle'
+      || status === 'pausedInterval') {
+      clearInterval(timerRef.current);
+    }
     return () => {
       clearInterval(timerRef.current);
     }
-  }, [status, count])
+  }, [status]);
+
+  useEffect(() => {
+    switch (status) {
+      case 'started':
+        setView('red');
+        break;
+      case 'interval':
+        setView('green');
+        break;
+      default:
+        setView('default');
+    }
+  }, [status])
 
 
-  const { remainMinutes, remainSeconds } = countDown(count);
+  const { remainMinutes, remainSeconds } = countDown(countDownPeriod);
 
   return (
-    <div className={clsx(status === 'started' && styles.red)}>
+    <div className={clsx(styles[view])}>
       {remainMinutes < 10 ? `0${remainMinutes}` : remainMinutes}:
       {remainSeconds < 10 ? `0${remainSeconds}` : remainSeconds}
     </div>
