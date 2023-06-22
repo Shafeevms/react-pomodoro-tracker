@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
 
 import { useAppDispatch } from '../../store/hooks';
-import { tick } from '../TimerSection/timerSectionSlice';
+import { tick } from '../TimerSection/timerSectionCountSlice';
 
 import styles from './index.module.scss';
 

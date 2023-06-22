@@ -7,12 +7,17 @@ import {
   expired,
   pause,
   pauseInterval,
-  plusMin,
   reset,
   resumeInterval,
-  selectDefaultTimer,
-  start
-} from './timerSectionSlice';
+  start,
+  selectDefaultTimerView,
+} from './timerSectionViewSlice';
+
+import {
+  plusMin,
+  selectDefaultTimerCount,
+} from './timerSectionCountSlice';
+
 import { selectCurrentTodo } from '../Todos/todosSlice';
 
 import styles from './index.module.scss';
@@ -21,13 +26,17 @@ const TimerSection = () => {
 
   const {
     timerStatus,
-    countDownPeriod,
     headerColor,
     firstButtonText,
     firstButtonView: { view: firstBtnView },
     secondButtonText,
     secondButtonView: { view: secondBtnView },
-  } = useAppSelector(selectDefaultTimer);
+  } = useAppSelector(selectDefaultTimerView);
+
+  const {
+    pauseCount,
+    countDownPeriod,
+  } = useAppSelector(selectDefaultTimerCount);
 
   const dispatch = useAppDispatch();
   const currentTodo = useAppSelector(selectCurrentTodo);
@@ -60,7 +69,9 @@ const TimerSection = () => {
       case 'started':
         dispatch(reset());
         break;
+      case 'interval':
       case 'paused':
+      case 'pausedInterval':
         dispatch(expired());
         break;
       default:
@@ -78,7 +89,7 @@ const TimerSection = () => {
 
   return (
     <div className={styles.timer}>
-      <Header view={headerColor} status={timerStatus}/>
+      <Header view={headerColor} status={timerStatus} pauseCount={pauseCount}/>
       <div className={styles.timer__grid}>
         <div className={styles.timer__clocks}>
           <Timer status={timerStatus} countDownPeriod={countDownPeriod}/>

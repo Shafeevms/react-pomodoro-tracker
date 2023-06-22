@@ -1,13 +1,15 @@
 import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
 import todos from '../Components/Todos/todosSlice';
 import modal from '../Components/Common/Modal/modalSlice';
-import timer from '../Components/TimerSection/timerSectionSlice';
+import timerView from '../Components/TimerSection/timerSectionViewSlice';
+import timerCount from '../Components/TimerSection/timerSectionCountSlice';
 
 export const store = configureStore({
   reducer: {
     todos,
     modal,
-    timer,
+    timerView,
+    timerCount,
   },
 });
 
