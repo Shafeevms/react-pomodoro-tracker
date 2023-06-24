@@ -46,7 +46,7 @@ const Timer = ({ status, countDownPeriod }: ITimer) => {
     return () => {
       clearInterval(timerRef.current);
     }
-  }, [status]);
+  }, [status, dispatch]);
 
   useEffect(() => {
     switch (status) {

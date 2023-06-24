@@ -23,7 +23,7 @@ export const todosSlice = createSlice({
       delete state[action.payload];
     },
     plusTomato: (state, action: PayloadAction<string>) => {
-      if (state[action.payload].tomatoes < 4) {
+      if (state[action.payload].tomatoes < 5) {
         state[action.payload].tomatoes += 1;
       }
     },

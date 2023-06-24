@@ -1,4 +1,4 @@
-import { expired, ITimerSectionView } from './timerSectionViewSlice';
+import { expired } from './timerSectionViewSlice';
 import { createSlice } from '@reduxjs/toolkit';
 import { AppDispatch, RootState } from '../../store/store';
 
@@ -8,7 +8,7 @@ export interface ITimerSectionCount {
 }
 
 const initialState: ITimerSectionCount = {
-  countDownPeriod: 5, //25 * 60, // 25 минут в секундах
+  countDownPeriod: 10, //25 * 60, // 25 минут в секундах
   pauseCount: 0,
 };
 
@@ -32,10 +32,16 @@ export const timerSectionCountSlice = createSlice({
         state.pauseCount = 0;
       })
       .addCase('timerView/fiveMinInterval', (state) => {
-        state.countDownPeriod = 4; // изменить на 5 * 60
+        if (state.pauseCount % 4 === 0 && state.pauseCount !== 0) {
+          console.log(1, state.pauseCount)
+          state.countDownPeriod = 10;
+        } else {
+          console.log(0)
+          state.countDownPeriod = 5; // изменить на 5 * 60
+        }
       })
-      .addCase('timer/reset', (state) => {
-        state.countDownPeriod = 5;
+      .addCase('timerView/reset', (state) => {
+        state.countDownPeriod = 10;
       })
   },
 })
