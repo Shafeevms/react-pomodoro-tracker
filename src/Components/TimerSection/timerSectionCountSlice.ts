@@ -33,10 +33,8 @@ export const timerSectionCountSlice = createSlice({
       })
       .addCase('timerView/fiveMinInterval', (state) => {
         if (state.pauseCount % 4 === 0 && state.pauseCount !== 0) {
-          console.log(1, state.pauseCount)
           state.countDownPeriod = 10;
         } else {
-          console.log(0)
           state.countDownPeriod = 5; // изменить на 5 * 60
         }
       })

@@ -1,0 +1,34 @@
+@import "../../index.scss";
+
+.mat {
+  width: 100%;
+  height: 179px;
+}
+
+.focus {
+  grid-area: focus;
+}
+
+.pause {
+  grid-area: pause;
+}
+
+.stop {
+  grid-area: stop;
+}
+
+.beige {
+  background-color: $beige;
+}
+
+.violet {
+  background-color: $violet;
+}
+
+.blue {
+  background-color: $blue;
+}
+
+.default {
+  background-color: $medium-gray;
+}

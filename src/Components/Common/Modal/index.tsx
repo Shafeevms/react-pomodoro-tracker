@@ -4,6 +4,7 @@ import { useAppDispatch } from '../../../store/hooks';
 import { toggleModal } from './modalSlice';
 
 import btnClose from './closebtn.png';
+
 import styles from './index.module.scss';
 
 interface IModal {
@@ -26,7 +27,7 @@ const Modal = ({ title, button }: IModal) => {
     <div className={styles.mat}>
       <div className={styles.modal}>
         <button className={styles.modal__btnCorner} onClick={closeHandler}>
-          <img src={btnClose}/>
+          <img src={btnClose} alt='button'/>
         </button>
         <h3 className={styles.modal__title}>{title}</h3>
         {button}
