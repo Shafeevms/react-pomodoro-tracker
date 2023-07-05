@@ -1,0 +1,66 @@
+@import '../../index.scss';
+
+.mat {
+  position: relative;
+  background-color: $medium-gray;
+
+  &__footer {
+    padding-left: 56px;
+    background-color: $dark-gray;
+  }
+
+  &__daysList {
+    height: 55px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 731px;
+  }
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 77px;
+    cursor: pointer;
+  }
+
+  &__lines {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__linesItem {
+    position: relative;
+    display: flex;
+  }
+
+  &__timeGrade {
+    position: absolute;
+    right: 20px;
+    bottom: -5px;
+    font-size: 12px;
+  }
+
+  &__line {
+    margin-right: 32px;
+    height: 83px;
+    width: 843px;
+    border-bottom: 1px solid $dark-gray;
+
+    &_last {
+      border-bottom: none;
+    }
+  }
+}
+
+.barsPlace {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 731px;
+  height: 415px;
+  left: 56px;
+}
+

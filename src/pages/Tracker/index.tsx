@@ -4,6 +4,7 @@ import Todos from '../../Components/Todos';
 import styles from './index.module.scss';
 
 const Tracker = () => {
+
   return (
     <div className={styles.tracker}>
       <section>

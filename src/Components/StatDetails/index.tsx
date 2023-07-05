@@ -52,6 +52,10 @@ const componentSVG = (badge: IStatDetails['badge']): ISVGComponent => {
   }
 };
 
+// числитель 25 минут знаменатель дополнительные минуты и паузы и сброс времени
+// похоже что это время от старта задачи до окончания последнего помидора
+
+// остановки это количество пауз и остановок
 
 const StatDetails = ({ data, badge, className }: IStatDetails) => {
 
@@ -65,8 +69,10 @@ const StatDetails = ({ data, badge, className }: IStatDetails) => {
 
   return (
     <div className={clsx(styles.mat, styles[grid], styles[color], className)}>
-      <h2>{title}</h2>
-      <p>{data}</p>
+      <div className={styles.mat__wrapper}>
+        <h2>{title}</h2>
+        <p className={styles.mat__data}>{data}</p>
+      </div>
       {SVGComponent && <SVGComponent stroke={stroke}/>}
     </div>
   );
