@@ -21,3 +21,5 @@ export const statisticsSlice = createSlice({
 
   }
 })
+
+export default statisticsSlice.reducer;

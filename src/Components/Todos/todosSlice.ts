@@ -75,8 +75,8 @@ export const selectTotalTomatoes = (state: RootState) => {
   const totalTomatoes = Object
     .values(state.todos)
     .reduce((acc, todo) => {
-    return acc += todo.tomatoes;
-  }, 0);
+      return acc += todo.tomatoes;
+    }, 0);
   return TIME_FOR_TOMATO * totalTomatoes;
 };
 

@@ -19,6 +19,9 @@ const Todos = () => {
       <Form/>
       <ul>
         {todos && todos.map(todoItem => {
+          if (!todoItem.id) {
+            return;
+          }
           const { id } = todoItem;
           return <TodoItem
             key={id}

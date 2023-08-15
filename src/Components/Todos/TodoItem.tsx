@@ -57,7 +57,7 @@ const TodoItem = ({ todoElement: { todo, tomatoes, id, editable } }: ITodoItem) 
         ref={divRef}
         contentEditable={editable}
         dangerouslySetInnerHTML={{ __html: text }}
-        onInput={handleInputChange}
+        onChange={handleInputChange}
         className={styles.item__todo}
       />
       <DropDown menu={menuMap}/>
