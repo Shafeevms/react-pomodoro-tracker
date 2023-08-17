@@ -21,6 +21,7 @@ import {
 import { selectCurrentTodo } from '../Todos/todosSlice';
 
 import styles from './index.module.scss';
+import { stopsCount } from '../../pages/Statistics/statisticsSlice';
 
 const TimerSection = () => {
 
@@ -51,6 +52,7 @@ const TimerSection = () => {
         break;
       case 'started':
         dispatch(pause());
+        dispatch(stopsCount());
         break;
       case 'interval':
         dispatch(pauseInterval());
@@ -68,6 +70,7 @@ const TimerSection = () => {
     switch (timerStatus) {
       case 'started':
         dispatch(reset());
+        dispatch(stopsCount());
         break;
       case 'interval':
       case 'paused':

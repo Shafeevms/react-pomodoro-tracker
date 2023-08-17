@@ -3,8 +3,10 @@ import clsx from 'clsx';
 
 import { useAppDispatch } from '../../store/hooks';
 import { tick } from '../TimerSection/timerSectionCountSlice';
+import { timeOnPauseCount, workTimeCount } from '../../pages/Statistics/statisticsSlice';
 
 import styles from './index.module.scss';
+
 
 const ONE_MINUTE = 60;
 const ONE_SECOND = 1;
@@ -16,8 +18,8 @@ const countDown = (seconds: number) => {
   return {
     remainMinutes,
     remainSeconds
-  }
-}
+  };
+};
 
 export interface ITimer {
   status: 'started' | 'paused' | 'idle' | 'interval' | 'pausedInterval',
@@ -31,10 +33,13 @@ const Timer = ({ status, countDownPeriod }: ITimer) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    console.log(status)
+    console.log(status);
     if (status === 'started' || status === 'interval') {
       timerRef.current = setInterval(() => {
         dispatch(tick());
+        if (status === 'started') {
+          dispatch(workTimeCount());
+        }
       }, 1000);
     }
 
@@ -45,8 +50,22 @@ const Timer = ({ status, countDownPeriod }: ITimer) => {
     }
     return () => {
       clearInterval(timerRef.current);
-    }
+    };
   }, [status, dispatch]);
+
+
+  useEffect(() => {
+    if (status === 'paused' || status === 'pausedInterval') {
+      timerRef.current = setInterval(() => {
+        dispatch(timeOnPauseCount());
+      }, 1000);
+    }
+
+    return () => {
+      clearInterval(timerRef.current);
+    };
+  }, [status, dispatch]);
+
 
   useEffect(() => {
     switch (status) {
@@ -59,7 +78,7 @@ const Timer = ({ status, countDownPeriod }: ITimer) => {
       default:
         setView('default');
     }
-  }, [status])
+  }, [status]);
 
 
   const { remainMinutes, remainSeconds } = countDown(countDownPeriod);

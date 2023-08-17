@@ -10,6 +10,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.2",
     "clsx": "^1.2.1",
+    "dayjs": "^1.11.9",
     "nanoid": "^4.0.1",
     "normalize.css": "^8.0.1",
     "react": "^18.2.0",

@@ -1,10 +1,12 @@
 .grid {
+  margin: 0 auto;
   padding-left: 80px;
   padding-right: 80px;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: 55px 260px 179px 179px;
   gap: 32px;
+  max-width: 1440px;
 
   &__title {
     grid-row: 1 / 2;

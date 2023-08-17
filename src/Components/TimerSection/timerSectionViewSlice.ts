@@ -2,6 +2,7 @@ import { IButton } from '../Common/Button';
 import { createSlice } from '@reduxjs/toolkit';
 import { AppDispatch, RootState } from '../../store/store';
 import { deleteTodo, minusTomato } from '../Todos/todosSlice';
+import { plusTotalTomato } from '../../pages/Statistics/statisticsSlice';
 
 export interface ITimerSectionView {
   headerColor: 'gray' | 'green' | 'tomato',
@@ -78,6 +79,7 @@ export const expired = () => {
       if (timerStatus === 'started' || timerStatus === 'paused') {
         dispatch(reset());
         dispatch(deleteTodo(id));
+        dispatch(plusTotalTomato());
       }
       if (timerStatus === 'interval' || timerStatus === 'pausedInterval') {
         dispatch(reset());
@@ -89,9 +91,11 @@ export const expired = () => {
       if (timerStatus === 'started') {
         dispatch(fiveMinInterval());
         dispatch(minusTomato(id));
+        dispatch(plusTotalTomato());
       }
       if (timerStatus === 'paused') {
         dispatch(minusTomato(id));
+        dispatch(plusTotalTomato());
         dispatch(reset());
         dispatch(start());
       }

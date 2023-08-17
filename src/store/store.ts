@@ -5,6 +5,8 @@ import todos from '../Components/Todos/todosSlice';
 import modal from '../Components/Common/Modal/modalSlice';
 import timerView from '../Components/TimerSection/timerSectionViewSlice';
 import timerCount from '../Components/TimerSection/timerSectionCountSlice';
+import statistics from '../pages/Statistics/statisticsSlice';
+
 import storage from 'redux-persist/lib/storage';
 
 const persistConfig = {
@@ -17,6 +19,7 @@ export const rootReducer = combineReducers({
   modal,
   timerView,
   timerCount,
+  statistics,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

@@ -8,7 +8,7 @@ export interface ITimerSectionCount {
 }
 
 const initialState: ITimerSectionCount = {
-  countDownPeriod: 10, //25 * 60, // 25 минут в секундах
+  countDownPeriod: 10, // TODO заменить 25 * 60, // 25 минут в секундах
   pauseCount: 0,
 };
 
@@ -20,7 +20,7 @@ export const timerSectionCountSlice = createSlice({
       state.countDownPeriod -= 1;
     },
     plusMin: (state) => {
-      state.countDownPeriod = state.countDownPeriod + 60;
+      state.countDownPeriod = state.countDownPeriod + 10; // TODO заменить на + 60
     },
   },
   extraReducers: builder => {
@@ -35,7 +35,7 @@ export const timerSectionCountSlice = createSlice({
         if (state.pauseCount % 4 === 0 && state.pauseCount !== 0) {
           state.countDownPeriod = 10;
         } else {
-          state.countDownPeriod = 5; // изменить на 5 * 60
+          state.countDownPeriod = 5; // TODO изменить на 5 * 60
         }
       })
       .addCase('timerView/reset', (state) => {
@@ -52,7 +52,7 @@ export const {
 export const tick = () => {
   return (dispatch: AppDispatch, getState: () => RootState) => {
     const { countDownPeriod } = getState().timerCount;
-    if (countDownPeriod === 0) {
+    if (countDownPeriod === 1) {
       dispatch(expired());
       return;
     }
