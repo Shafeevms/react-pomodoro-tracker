@@ -5,15 +5,15 @@ import { Provider } from 'react-redux';
 import { persistor, store } from './store/store';
 import App from './App';
 
-// import dayjs from 'dayjs';
-// import 'dayjs/locale/ru';
+import dayjs from 'dayjs';
+import 'dayjs/locale/ru';
 
-import './reset.css';
+import './reset.css'
 import 'normalize.css';
 import './index.scss';
 import { PersistGate } from 'redux-persist/integration/react';
 
-// dayjs.locale('ru');
+dayjs.locale('ru');
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);

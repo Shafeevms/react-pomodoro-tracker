@@ -3,24 +3,31 @@ import tomatoWithData from './tomato_with_data.png';
 import tomatoWithoutData from './tomato_no_data.png';
 
 import styles from './index.module.scss';
+import { useAppSelector } from '../../store/hooks';
+import { selectStatistics } from '../../pages/Statistics/statisticsSlice';
+import { declOfNum } from '../../helpers/data.helper';
+
 
 interface ISpentTomatoes {
   className?: string;
 }
 
+const TOMATOES = ['помидор', 'помидора', 'помидоров'];
+
 const SpentTomatoes = ({ className }: ISpentTomatoes) => {
-  const data = 0;
+  const { tomatoes } = useAppSelector(selectStatistics);
+
   return (
     <div className={clsx(styles.mat, className)}>
       {
-        data ?
+        tomatoes ?
           <div className={styles.mat__wrapWithData}>
             <div className={styles.mat__tomatoWrapper}>
               <img className={styles.mat__withData} alt="tomato" src={tomatoWithData}/>
-              <span className={styles.mat__number}>{2}</span>
+              <span className={styles.mat__number}>{tomatoes}</span>
             </div>
             <footer className={styles.mat__footer}>
-              2 помидора
+              { `${tomatoes} ${declOfNum(tomatoes, TOMATOES)}` }
             </footer>
           </div>
           : <div className={styles.mat__wrapWithoutData}>

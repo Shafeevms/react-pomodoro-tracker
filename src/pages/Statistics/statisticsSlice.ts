@@ -1,5 +1,8 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import dayjs from 'dayjs';
+import { RootState } from '../../store/store';
+import { TODAY } from './index';
+
 
 export interface IStatisticsSlice {
   stops: number,
@@ -8,7 +11,7 @@ export interface IStatisticsSlice {
   tomatoes: number,
 }
 
-const TODAY = dayjs().format('YYYY-MM-DD');
+// const TODAY = dayjs().format('YYYY-MM-DD');
 
 export const initialState: Record<string, IStatisticsSlice> = {
   [TODAY]: {
@@ -17,7 +20,7 @@ export const initialState: Record<string, IStatisticsSlice> = {
     workTime: 0,
     tomatoes: 0,
   }
-}
+};
 
 export const statisticsSlice = createSlice({
   name: 'statistics',
@@ -40,7 +43,7 @@ export const statisticsSlice = createSlice({
     builder
       .addCase('timerCount/plusMin', (state) => {
         state[TODAY].timeOnPause += 10; // TODO заменить на 60
-      })
+      });
   }
 });
 
@@ -50,5 +53,7 @@ export const {
   stopsCount,
   plusTotalTomato,
 } = statisticsSlice.actions;
+
+export const selectStatistics = (state: RootState) => state.statistics[TODAY];
 
 export default statisticsSlice.reducer;

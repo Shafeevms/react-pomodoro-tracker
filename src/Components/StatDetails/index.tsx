@@ -9,14 +9,14 @@ import styles from './index.module.scss';
 
 
 interface IStatDetails {
-  badge: 'stop' | 'pause' | 'focus',
-  data: string,
+  badge: 'stop' | 'pause' | 'focus' | 'stopDefault' | 'pauseDefault' | 'focusDefault',
+  data: string | number,
   className?: string,
 }
 
 interface ISVGComponent {
   SVGComponent: React.ComponentType<any>;
-  grid: string;
+  gridArea: string;
   title: string;
   color: 'beige' | 'violet' | 'blue' | 'default',
   stroke: string,
@@ -28,47 +28,66 @@ const componentSVG = (badge: IStatDetails['badge']): ISVGComponent => {
     case 'focus':
       return {
         SVGComponent: ringSVG,
-        grid: badge,
+        gridArea: badge,
         title: 'Фокус',
         color: 'beige',
         stroke: '#FFAE35',
       };
+    case 'focusDefault':
+      return {
+        SVGComponent: ringSVG,
+        gridArea: badge,
+        title: 'Фокус',
+        color: 'default',
+        stroke: '#C4C4C4',
+      };
     case 'pause':
       return {
         SVGComponent: clockSVG,
-        grid: badge,
+        gridArea: badge,
         title: 'Время на паузе',
         color: 'violet',
         stroke: '#9C97D7',
       };
-    default:
+    case 'pauseDefault':
+      return {
+        SVGComponent: clockSVG,
+        gridArea: badge,
+        title: 'Время на паузе',
+        color: 'default',
+        stroke: '#C4C4C4',
+      };
+    case 'stop':
       return {
         SVGComponent: stopSVG,
-        grid: badge,
+        gridArea: badge,
         title: 'Остановки',
         color: 'blue',
         stroke: '#7FC2D7',
       };
+    default: // stopDefault
+      return {
+        SVGComponent: stopSVG,
+        gridArea: badge,
+        title: 'Остановки',
+        color: 'default',
+        stroke: '#C4C4C4',
+      };
   }
 };
-
-// числитель 25 минут знаменатель дополнительные минуты и паузы и сброс времени
-// похоже что это время от старта задачи до окончания последнего помидора
-
-// остановки это количество пауз и остановок
 
 const StatDetails = ({ data, badge, className }: IStatDetails) => {
 
   const {
     SVGComponent,
-    grid,
+    gridArea,
     title,
     color,
     stroke
   } = componentSVG(badge);
 
   return (
-    <div className={clsx(styles.mat, styles[grid], styles[color], className)}>
+    <div className={clsx(styles.mat, styles[gridArea], styles[color], className)}>
       <div className={styles.mat__wrapper}>
         <h2>{title}</h2>
         <p className={styles.mat__data}>{data}</p>
