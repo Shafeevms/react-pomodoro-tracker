@@ -12,13 +12,13 @@ import { selectStatistics } from './statisticsSlice';
 import { showParsedDuration } from '../../helpers/data.helper';
 
 
-export const TODAY = dayjs().format('YYYY-MM-DD');
-
 const Statistics = () => {
   const { workTime, timeOnPause, stops } = useAppSelector(selectStatistics);
 
   const totalTimeSpent = workTime + timeOnPause;
   const focus = workTime ? Math.round((workTime / totalTimeSpent) * 100) : 0;
+
+  console.log(showParsedDuration(timeOnPause, true));
 
   return (
     <div className={styles.grid}>
@@ -26,13 +26,13 @@ const Statistics = () => {
       <Select className={styles.grid__weeks}/>
       <DayData className={styles.grid__dayData}/>
       <SpentTomatoes className={styles.grid__tomatoes}/>
-      <StatDetails className={styles.grid__focus} badge={'focus'} data={`${focus}%`}/>
+      <StatDetails className={styles.grid__focus} badge={workTime ? 'focus' : 'focusDefault'} data={`${focus}%`}/>
       <StatDetails
         className={styles.grid__pause}
-        badge={'pause'}
+        badge={workTime ? 'pause' : 'pauseDefault'}
         data={`${showParsedDuration(timeOnPause, true)}`}
       />
-      <StatDetails className={styles.grid__stop} badge={'stop'} data={stops}/>
+      <StatDetails className={styles.grid__stop} badge={workTime ? 'stop' : 'stopDefault'} data={stops}/>
       <Histogram className={styles.grid__bars}/>
     </div>
   );

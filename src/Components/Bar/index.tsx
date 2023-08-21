@@ -5,15 +5,26 @@ import styles from './index.module.scss';
 
 interface IBar {
   altitude: number,
+  isToday?: boolean,
 }
 
-const Bar = ({ altitude }: IBar) => {
+const Bar = ({ altitude, isToday }: IBar) => {
+  const backgroundColor = (): string => {
+    if (isToday) {
+      return 'tomato';
+    }
+    if (altitude <= 3) {
+      return 'gray';
+    }
+    return 'coral';
+  }
+
   return (
-    <div className={clsx(styles.bar)}
-         style={{ height: altitude === 0 ? 1 + '%' : altitude + '%', // magic Number 1% чтобы возвышался минимальный размер бара )))
-                  backgroundColor: altitude <= 3 ? '#adacac' : ''}}>
+    <div className={clsx(styles.bar, styles[backgroundColor()])}
+         style={{ height: altitude === 0 ? 1 + '%' : altitude + '%'}}>
     </div>
   );
 };
+// magic Number 1% чтобы возвышался минимальный размер бара )))
 
 export default Bar;

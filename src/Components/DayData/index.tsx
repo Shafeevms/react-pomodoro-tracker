@@ -11,6 +11,8 @@ interface IDayData {
   className?: string,
 }
 
+
+// TODO сюда должны передаваться данные из родительского компонента
 const capitalisedWord = (word: string): string => word.charAt(0).toUpperCase() + word.slice(1);
 
 const DayData = ({ className }: IDayData) => {

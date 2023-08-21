@@ -1,10 +1,13 @@
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import advancedFormat from 'dayjs/plugin/advancedFormat';
+import isoWeek from 'dayjs/plugin/isoWeek';
 
 
 dayjs.extend(duration);
-dayjs.extend(relativeTime);
+dayjs.extend(advancedFormat);
+dayjs.extend(isoWeek);
 
 
 const HOURS = ['час', 'часа', 'часов'];
@@ -34,5 +37,7 @@ export const showParsedDuration = (seconds: number, isNamingShort?: boolean): st
         return `${num}${isNamingShort ? 'с' : ' ' + declOfNum(+num, SECONDS)}`;
       }
     })
-    .join(' ');
+    .join(' ')
 };
+
+export const todayDayAndWeek = (): string => dayjs().format('d-W');

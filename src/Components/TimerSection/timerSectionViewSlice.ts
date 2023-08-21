@@ -58,7 +58,7 @@ export const timerSectionViewSlice = createSlice({
       state.secondButtonView = { view: 'border-red' };
     },
     reset: (state) => initialState,
-  },
+  }
 });
 
 export const {

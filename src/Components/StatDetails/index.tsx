@@ -86,11 +86,13 @@ const StatDetails = ({ data, badge, className }: IStatDetails) => {
     stroke
   } = componentSVG(badge);
 
+  console.log(data);
+
   return (
     <div className={clsx(styles.mat, styles[gridArea], styles[color], className)}>
       <div className={styles.mat__wrapper}>
         <h2>{title}</h2>
-        <p className={styles.mat__data}>{data}</p>
+        <p className={styles.mat__data}>{data === '  ' ? '0м' : data}</p>
       </div>
       {SVGComponent && <SVGComponent stroke={stroke}/>}
     </div>

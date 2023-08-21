@@ -41,6 +41,7 @@ export const timerSectionCountSlice = createSlice({
       .addCase('timerView/reset', (state) => {
         state.countDownPeriod = 10;
       })
+
   },
 })
 
