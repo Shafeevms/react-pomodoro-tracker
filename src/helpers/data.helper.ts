@@ -1,8 +1,8 @@
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
-import relativeTime from 'dayjs/plugin/relativeTime';
 import advancedFormat from 'dayjs/plugin/advancedFormat';
 import isoWeek from 'dayjs/plugin/isoWeek';
+import { IStatisticsSlice } from '../pages/Statistics/statisticsSlice';
 
 
 dayjs.extend(duration);
@@ -37,7 +37,36 @@ export const showParsedDuration = (seconds: number, isNamingShort?: boolean): st
         return `${num}${isNamingShort ? 'с' : ' ' + declOfNum(+num, SECONDS)}`;
       }
     })
-    .join(' ')
+    .join(' ');
 };
 
 export const todayDayAndWeek = (): string => dayjs().format('d-W');
+export const currentWeek = (): number => +dayjs().format('W');
+export const currentDay = (): number => dayjs().day();
+
+export const findDataFromPresentWeek = (object: Record<string, IStatisticsSlice>, week: number) => {
+  const filteredData: Record<string, IStatisticsSlice> = {};
+  const separatedWeek = (date: string) => +date.split('-')[1];
+  const weekWorkData: number[] = [];
+
+  for (let date in object) {
+    if (separatedWeek(date) === week) {
+      filteredData[String(date)] = object[date];
+    }
+  }
+
+  if (Object.keys(filteredData).length === 0) {
+    return weekWorkData.fill(0, 0, 6);
+  }
+
+  for (let i = 0; i <= 6; i++) {
+    const dayStatistics =
+      Object
+        .entries(filteredData)
+        .find(el => el[0] === `${i}-${week}`);
+    dayStatistics
+      ? weekWorkData.push(dayStatistics[1].workTime)
+      : weekWorkData.push(0);
+  }
+  return weekWorkData;
+};

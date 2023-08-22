@@ -1,9 +1,12 @@
 import Bar from '../Bar';
 import clsx from 'clsx';
-import React, { ReactNode } from 'react';
+import React, { ReactNode, SyntheticEvent, useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 
 import styles from './index.module.scss';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { changeDay, selectCalendar } from '../../pages/Statistics/calendarSlice';
+import { selectWeekWorkData } from '../../pages/Statistics/statisticsSlice';
 
 
 interface IHistogram {
@@ -11,30 +14,46 @@ interface IHistogram {
 }
 
 const getAltitude = (array: number[]): [number[], number] => {
-  const maxValue = Math.max(...array);
-  while (array.length < 7) {
-    array.push(0);
-  }
-  return [array.map(number => Math.round((number / maxValue) * 100)), maxValue];
+  const calcMaxValue = Math.max(...array);
+  return [array.map(number => Math.round((number / calcMaxValue) * 100)), calcMaxValue];
 };
 
 const DAYS = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
 
-// нужно получить данные за неделю
 
 const Histogram = ({ className }: IHistogram) => {
 
-  const activityTime = [2000, 145, 500, 2100, 840, 300, 2];
-  const [altitude, maxValue] = getAltitude(activityTime);
+  const dispatch = useAppDispatch();
+  const { day } = useAppSelector(selectCalendar);
+  const activityTime = useAppSelector(selectWeekWorkData);
 
-  const markDay = (index: number): string => dayjs().day() === index ? 'tomato' : '';
+  const [altitude, setAltitude] = useState<number[]>([]);
+  const [maxValue, setMaxValue] = useState(0);
+
+  useEffect(() => {
+    const [calcAltitude, calcMaxValue] = getAltitude(activityTime);
+    setAltitude(calcAltitude);
+    setMaxValue(calcMaxValue);
+
+  }, [activityTime])
+
+  const markDay = (index: number): string => day === index ? 'tomato' : '';
+
+  const handleClick = (index: number) => {
+    dispatch(changeDay(index));
+  }
 
 
   return (
     <div className={clsx(styles.mat, className)}>
       <div className={styles.barsPlace}>
         {altitude.map((bar, index): ReactNode => {
-          return <Bar key={index} altitude={bar} isToday={dayjs().day() === index}/>;
+          return <Bar
+            key={index}
+            altitude={bar}
+            isToday={day === index}
+            onClick={() => handleClick(index)}
+          />;
         })}
       </div>
       <div>
@@ -64,6 +83,7 @@ const Histogram = ({ className }: IHistogram) => {
             {
               DAYS.map((day, index) => {
                 return <li
+                  onClick={() => handleClick(index)}
                   key={index}
                   className={clsx(styles.mat__day, styles[markDay(index)])
                   }

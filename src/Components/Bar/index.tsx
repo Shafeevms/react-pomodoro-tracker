@@ -6,9 +6,10 @@ import styles from './index.module.scss';
 interface IBar {
   altitude: number,
   isToday?: boolean,
+  onClick: () => void
 }
 
-const Bar = ({ altitude, isToday }: IBar) => {
+const Bar = ({ altitude, isToday, onClick }: IBar) => {
   const backgroundColor = (): string => {
     if (isToday) {
       return 'tomato';
@@ -21,6 +22,7 @@ const Bar = ({ altitude, isToday }: IBar) => {
 
   return (
     <div className={clsx(styles.bar, styles[backgroundColor()])}
+         onClick={onClick}
          style={{ height: altitude === 0 ? 1 + '%' : altitude + '%'}}>
     </div>
   );

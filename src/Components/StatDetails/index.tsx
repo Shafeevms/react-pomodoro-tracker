@@ -86,8 +86,6 @@ const StatDetails = ({ data, badge, className }: IStatDetails) => {
     stroke
   } = componentSVG(badge);
 
-  console.log(data);
-
   return (
     <div className={clsx(styles.mat, styles[gridArea], styles[color], className)}>
       <div className={styles.mat__wrapper}>

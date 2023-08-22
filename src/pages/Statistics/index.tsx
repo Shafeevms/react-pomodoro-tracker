@@ -4,12 +4,11 @@ import SpentTomatoes from '../../Components/SpentTomatoes';
 import StatDetails from '../../Components/StatDetails';
 import Histogram from '../../Components/Histogram';
 
-import dayjs from 'dayjs';
-
-import styles from './index.module.scss';
 import { useAppSelector } from '../../store/hooks';
 import { selectStatistics } from './statisticsSlice';
 import { showParsedDuration } from '../../helpers/data.helper';
+
+import styles from './index.module.scss';
 
 
 const Statistics = () => {

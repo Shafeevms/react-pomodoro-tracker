@@ -1,8 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import dayjs from 'dayjs';
 import { RootState } from '../../store/store';
 
-import { todayDayAndWeek } from '../../helpers/data.helper';
+import { findDataFromPresentWeek, todayDayAndWeek } from '../../helpers/data.helper';
 
 
 export interface IStatisticsSlice {
@@ -73,6 +72,24 @@ export const {
   plusTotalTomato,
 } = statisticsSlice.actions;
 
-export const selectStatistics = (state: RootState) => state.statistics[todayDayAndWeek()];
+
+export const selectStatistics = (state: RootState) => {
+  const { day, week } = state.calendar;
+  if (!state.statistics[`${day}-${week}`]) {
+    return {
+      stops: 0,
+      workTime: 0,
+      timeOnPause: 0,
+      tomatoes: 0,
+    };
+  }
+  return state.statistics[`${day}-${week}`];
+};
+
+export const selectWeekWorkData = (state: RootState) => {
+  const { week } = state.calendar;
+  return findDataFromPresentWeek(state.statistics, week);
+};
+
 
 export default statisticsSlice.reducer;

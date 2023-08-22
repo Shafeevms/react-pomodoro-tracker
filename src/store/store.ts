@@ -6,6 +6,7 @@ import modal from '../Components/Common/Modal/modalSlice';
 import timerView from '../Components/TimerSection/timerSectionViewSlice';
 import timerCount from '../Components/TimerSection/timerSectionCountSlice';
 import statistics from '../pages/Statistics/statisticsSlice';
+import calendar from '../pages/Statistics/calendarSlice';
 
 import storage from 'redux-persist/lib/storage';
 
@@ -20,6 +21,7 @@ export const rootReducer = combineReducers({
   timerView,
   timerCount,
   statistics,
+  calendar,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
