@@ -10,17 +10,19 @@ export interface IStatisticsSlice {
   workTime: number,
   tomatoes: number,
 }
-const TODAY = todayDayAndWeek();
+
 
 const addCurrentDayToState = (state: Record<string, IStatisticsSlice>) => {
-  /*if (!state[TODAY]) {
+  const TODAY = todayDayAndWeek();
+  if (!state[TODAY]) {
     state[TODAY] = {
       stops: 0,
       workTime: 0,
       timeOnPause: 0,
       tomatoes: 0,
     };
-  }*/
+  }
+  return TODAY;
 };
 
 
@@ -38,26 +40,26 @@ export const statisticsSlice = createSlice({
   initialState,
   reducers: {
     workTimeCount: (state) => {
-      addCurrentDayToState(state);
+      const TODAY = addCurrentDayToState(state);
       state[TODAY].workTime += 1;
     },
     timeOnPauseCount: (state) => {
-      addCurrentDayToState(state);
+      const TODAY = addCurrentDayToState(state);
       state[TODAY].timeOnPause += 1;
     },
     stopsCount: (state) => {
-      addCurrentDayToState(state);
+      const TODAY = addCurrentDayToState(state);
       state[TODAY].stops += 1;
     },
     plusTotalTomato: (state) => {
-      addCurrentDayToState(state);
+      const TODAY = addCurrentDayToState(state);
       state[TODAY].tomatoes += 1;
     }
   },
   extraReducers: (builder => {
     builder
       .addCase('timerCount/plusMin', (state) => {
-        addCurrentDayToState(state);
+        const TODAY = addCurrentDayToState(state);
         state[TODAY].timeOnPause += 10; // TODO заменить на 60
       });
   })

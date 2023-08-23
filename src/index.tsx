@@ -18,9 +18,7 @@ import './index.scss';
 
 dayjs.locale('ru');
 
-dayjs.extend(duration);
-dayjs.extend(advancedFormat);
-dayjs.extend(isoWeek);
+
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);

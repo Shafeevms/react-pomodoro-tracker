@@ -1,5 +1,12 @@
 import dayjs from 'dayjs';
 import { IStatisticsSlice } from '../pages/Statistics/slices/statisticsSlice';
+import duration from 'dayjs/plugin/duration';
+import advancedFormat from 'dayjs/plugin/advancedFormat';
+import isoWeek from 'dayjs/plugin/isoWeek';
+
+dayjs.extend(duration);
+dayjs.extend(advancedFormat);
+dayjs.extend(isoWeek);
 
 const HOURS = ['час', 'часа', 'часов'];
 const MINUTES = ['минута', 'минуты', 'минут'];
