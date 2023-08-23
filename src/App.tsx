@@ -1,5 +1,6 @@
-import Header from './Components/Header';
+import Header from './components/Header';
 import { Route, Routes } from 'react-router-dom';
+
 import Tracker from './pages/Tracker';
 import Statistics from './pages/Statistics';
 import ErrorPage from './pages/404';

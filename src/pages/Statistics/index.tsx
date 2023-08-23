@@ -1,29 +1,23 @@
-import Select from '../../Components/SelectWeek';
-import DayData from '../../Components/DayData';
-import SpentTomatoes from '../../Components/SpentTomatoes';
-import StatDetails from '../../Components/StatDetails';
-import Histogram from '../../Components/Histogram';
+import { useEffect } from 'react';
 
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { selectStatistics } from './statisticsSlice';
-import { currentDay, currentWeek, showParsedDuration } from '../../helpers/data.helper';
+import Select from './components/SelectWeek';
+import DayData from './components/DayData';
+import SpentTomatoes from './components/SpentTomatoes';
+import Badges from './components/Badges';
+import Histogram from './components/Histogram';
+
+import { useAppDispatch } from '../../store/hooks';
+import { changeDay, changeWeek } from './slices/calendarSlice';
 
 import styles from './index.module.scss';
-import { useEffect } from 'react';
-import { changeDay, changeWeek, selectCalendar } from './calendarSlice';
-
 
 const Statistics = () => {
   const dispatch = useAppDispatch();
-  const { workTime, timeOnPause, stops } = useAppSelector(selectStatistics);
-
-  const totalTimeSpent = workTime + timeOnPause;
-  const focus = workTime ? Math.round((workTime / totalTimeSpent) * 100) : 0;
 
   useEffect(() => {
-    dispatch(changeDay(currentDay()));
-    dispatch(changeWeek(currentWeek()));
-  }, [])
+    dispatch(changeDay());
+    dispatch(changeWeek());
+  }, []);
 
   return (
     <div className={styles.grid}>
@@ -31,19 +25,7 @@ const Statistics = () => {
       <Select className={styles.grid__weeks}/>
       <DayData className={styles.grid__dayData}/>
       <SpentTomatoes className={styles.grid__tomatoes}/>
-      <StatDetails
-        className={styles.grid__focus}
-        badge={workTime ? 'focus' : 'focusDefault'}
-        data={`${focus}%`}/>
-      <StatDetails
-        className={styles.grid__pause}
-        badge={workTime ? 'pause' : 'pauseDefault'}
-        data={`${showParsedDuration(timeOnPause, true)}`}
-      />
-      <StatDetails
-        className={styles.grid__stop}
-        badge={workTime ? 'stop' : 'stopDefault'}
-        data={stops}/>
+      <Badges/>
       <Histogram className={styles.grid__bars}/>
     </div>
   );

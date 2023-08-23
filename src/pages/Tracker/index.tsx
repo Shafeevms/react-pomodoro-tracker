@@ -1,5 +1,5 @@
-import TimerSection from '../../Components/TimerSection';
-import Todos from '../../Components/Todos';
+import TimerSection from '../../components/TimerSection';
+import Todos from '../../components/Todos';
 
 import styles from './index.module.scss';
 
