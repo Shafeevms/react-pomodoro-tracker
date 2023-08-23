@@ -16,10 +16,10 @@ export const calendarSlice = createSlice({
   name: 'calendar',
   initialState,
   reducers: {
-    changeWeek: (state, action: PayloadAction<ICalendarSlice['week']>) => {
+    changeWeek: (state, action: PayloadAction<number>) => {
       state.week = action.payload;
     },
-    changeDay: (state, action: PayloadAction<ICalendarSlice['day']>) => {
+    changeDay: (state, action: PayloadAction<number>) => {
       state.day = action.payload;
     },
   }

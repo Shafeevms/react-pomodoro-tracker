@@ -56,7 +56,7 @@ export const findDataFromPresentWeek = (object: Record<string, IStatisticsSlice>
   }
 
   if (Object.keys(filteredData).length === 0) {
-    return weekWorkData.fill(0, 0, 6);
+    return new Array(7).fill(0);
   }
 
   for (let i = 0; i <= 6; i++) {

@@ -7,6 +7,7 @@ import styles from './index.module.scss';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { changeDay, selectCalendar } from '../../pages/Statistics/calendarSlice';
 import { selectWeekWorkData } from '../../pages/Statistics/statisticsSlice';
+import { showParsedDuration } from '../../helpers/data.helper';
 
 
 interface IHistogram {
@@ -15,7 +16,16 @@ interface IHistogram {
 
 const getAltitude = (array: number[]): [number[], number] => {
   const calcMaxValue = Math.max(...array);
-  return [array.map(number => Math.round((number / calcMaxValue) * 100)), calcMaxValue];
+  const calcAltitude = (array: number[]) => {
+    return array.map(number => {
+      const num = Math.round((number / calcMaxValue) * 100);
+      if (Number.isNaN(num)) {
+        return 0;
+      }
+      return num;
+    })
+  }
+  return [calcAltitude(array), calcMaxValue];
 };
 
 const DAYS = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
@@ -43,13 +53,12 @@ const Histogram = ({ className }: IHistogram) => {
     dispatch(changeDay(index));
   }
 
-
   return (
     <div className={clsx(styles.mat, className)}>
       <div className={styles.barsPlace}>
         {altitude.map((bar, index): ReactNode => {
           return <Bar
-            key={index}
+            key={`bar-component-${index}`}
             altitude={bar}
             isToday={day === index}
             onClick={() => handleClick(index)}
@@ -60,19 +69,19 @@ const Histogram = ({ className }: IHistogram) => {
         <ul className={styles.mat__lines}>
           <li className={styles.mat__linesItem}>
             <div className={styles.mat__line}></div>
-            <span className={styles.mat__timeGrade}>{maxValue * 0.8}</span>
+            <span className={styles.mat__timeGrade}>{showParsedDuration(maxValue * 0.8, true)}</span>
           </li>
           <li className={styles.mat__linesItem}>
             <div className={styles.mat__line}></div>
-            <span className={styles.mat__timeGrade}>{maxValue * 0.6}</span>
+            <span className={styles.mat__timeGrade}>{showParsedDuration(maxValue * 0.6, true)}</span>
           </li>
           <li className={styles.mat__linesItem}>
             <div className={styles.mat__line}></div>
-            <span className={styles.mat__timeGrade}>{maxValue * 0.4}</span>
+            <span className={styles.mat__timeGrade}>{showParsedDuration(maxValue * 0.4, true)}</span>
           </li>
           <li className={styles.mat__linesItem}>
             <div className={styles.mat__line}></div>
-            <span className={styles.mat__timeGrade}>{maxValue * 0.2}</span>
+            <span className={styles.mat__timeGrade}>{showParsedDuration(maxValue * 0.2, true)}</span>
           </li>
           <li className={styles.mat__linesItem}>
             <div className={clsx(styles.mat__line, styles.mat__line_last)}></div>

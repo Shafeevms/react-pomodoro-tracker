@@ -18,12 +18,14 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
-    "esModuleInterop": true
+    "jsx": "react-jsx"
   },
   "include": [
     "src",
     "additional.d.ts"
+  ],
+  "exclude": [
+    "node_modules"
   ],
   "types": ["@types/node", "@types/react", "@types/react-dom", "@types/jest", "@types/testing-library__react"],
 }
