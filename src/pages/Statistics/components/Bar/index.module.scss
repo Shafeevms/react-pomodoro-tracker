@@ -1,0 +1,19 @@
+@import "../../../../index";
+
+.bar {
+  width: 77px;
+  z-index: 5;
+  cursor: pointer;
+}
+
+.gray {
+  background-color: $gray;
+}
+
+.tomato {
+  background-color: $tomato;
+}
+
+.coral {
+  background-color: $coral;
+}

@@ -18,8 +18,6 @@ import './index.scss';
 
 dayjs.locale('ru');
 
-
-
 const container = document.getElementById('root')!;
 const root = createRoot(container);
 

@@ -1,12 +1,13 @@
-import Bar from '../../../../components/Bar';
+import Bar from '../Bar';
 import clsx from 'clsx';
 import React from 'react';
 
 import styles from './index.module.scss';
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import { changeDay, selectCalendar } from '../../slices/calendarSlice';
-import { DAYS, showParsedDuration } from '../../../../helpers/date';
-import { useAltitude } from '../../hooks/useAltitude';
+import { DAYS } from '../../../../helpers/date';
+import { selectAltitude } from '../../selectors/selectAltitude';
+import { getParsedDuration } from '../../selectors/getParsedDuration';
 
 
 interface IHistogram {
@@ -18,7 +19,7 @@ const markDay = (index: number, day: number): string => day === index ? 'tomato'
 const Histogram = ({ className }: IHistogram) => {
   const dispatch = useAppDispatch();
   const { day } = useAppSelector(selectCalendar);
-  const { altitude, maxValue } = useAltitude();
+  const { altitude, maxValue } = useAppSelector(selectAltitude);
 
   const handleClick = (index: number) => {
     dispatch(changeDay(index));
@@ -39,7 +40,7 @@ const Histogram = ({ className }: IHistogram) => {
       <div>
         <ul className={styles.mat__lines}>
           {[0.8, 0.6, 0.4, 0.2].map(
-            (factor, index) => <LineItem maxValue={maxValue} factor={factor} key={`line-item-${index}`} />
+            (factor, index) => <LineItem maxValue={maxValue} factor={factor} key={`line-item-${index}`}/>
           )}
           <li className={styles.mat__linesItem}>
             <div className={clsx(styles.mat__line, styles.mat__line_last)}></div>
@@ -67,9 +68,9 @@ const LineItem = ({ maxValue, factor }: { maxValue: number, factor: number }) =>
   return <li className={styles.mat__linesItem}>
     <div className={styles.mat__line}></div>
     <span className={styles.mat__timeGrade}>
-              {showParsedDuration(maxValue * factor, true)}
-            </span>
-  </li>
-}
+      {getParsedDuration(maxValue * factor, true)}
+    </span>
+  </li>;
+};
 
 export default Histogram;

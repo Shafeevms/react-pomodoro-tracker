@@ -1,8 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { findDataFromPresentWeek, todayDayAndWeek } from '../../../helpers/date';
-import { RootState } from '../../../store/types';
-
+import { todayDayAndWeek } from '../../../helpers/date';
+import { getInitialDailyStat } from '../../../helpers/statistics';
 
 export interface IStatisticsSlice {
   stops: number,
@@ -11,86 +10,40 @@ export interface IStatisticsSlice {
   tomatoes: number,
 }
 
-
-const addCurrentDayToState = (state: Record<string, IStatisticsSlice>) => {
-  const TODAY = todayDayAndWeek();
-  if (!state[TODAY]) {
-    state[TODAY] = {
-      stops: 0,
-      workTime: 0,
-      timeOnPause: 0,
-      tomatoes: 0,
-    };
-  }
-  return TODAY;
-};
-
-
 export const initialState: Record<string, IStatisticsSlice> = {
-  [todayDayAndWeek()]: {
-    stops: 0,
-    workTime: 0,
-    timeOnPause: 0,
-    tomatoes: 0,
-  }
+  [todayDayAndWeek()]: getInitialDailyStat(),
 };
 
 export const statisticsSlice = createSlice({
   name: 'statistics',
   initialState,
   reducers: {
-    workTimeCount: (state) => {
-      const TODAY = addCurrentDayToState(state);
-      state[TODAY].workTime += 1;
+    plusWorkTime: (state) => {
+      state[todayDayAndWeek()].workTime += 1;
     },
-    timeOnPauseCount: (state) => {
-      const TODAY = addCurrentDayToState(state);
-      state[TODAY].timeOnPause += 1;
+    plusTimeOnPause: (state) => {
+      state[todayDayAndWeek()].timeOnPause += 1;
     },
-    stopsCount: (state) => {
-      const TODAY = addCurrentDayToState(state);
-      state[TODAY].stops += 1;
+    plusStops: (state) => {
+      state[todayDayAndWeek()].stops += 1;
     },
     plusTotalTomato: (state) => {
-      const TODAY = addCurrentDayToState(state);
-      state[TODAY].tomatoes += 1;
+      state[todayDayAndWeek()].tomatoes += 1;
     }
   },
   extraReducers: (builder => {
     builder
       .addCase('timerCount/plusMin', (state) => {
-        const TODAY = addCurrentDayToState(state);
-        state[TODAY].timeOnPause += 10; // TODO заменить на 60
+        state[todayDayAndWeek()].timeOnPause += 10; // TODO заменить на 60
       });
   })
 });
 
 export const {
-  workTimeCount,
-  timeOnPauseCount,
-  stopsCount,
+  plusWorkTime,
+  plusTimeOnPause,
+  plusStops,
   plusTotalTomato,
 } = statisticsSlice.actions;
-
-
-export const selectStatistics = (state: RootState) => {
-  const { day, week } = state.calendar;
-
-  if (!state.statistics[`${day}-${week}`]) {
-    return {
-      stops: 0,
-      workTime: 0,
-      timeOnPause: 0,
-      tomatoes: 0,
-    };
-  }
-  return state.statistics[`${day}-${week}`];
-};
-
-export const selectWeekWorkData = (state: RootState) => {
-  const { week } = state.calendar;
-  return findDataFromPresentWeek(state.statistics, week);
-};
-
 
 export default statisticsSlice.reducer;

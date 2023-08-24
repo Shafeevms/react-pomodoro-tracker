@@ -2,9 +2,10 @@ import { useMemo } from 'react';
 
 import StatDetails from '../StatDetails';
 import styles from '../../index.module.scss';
-import { showParsedDuration } from '../../../../helpers/date';
-import { useAppSelector } from '../../../../store/hooks';
-import { selectStatistics } from '../../slices/statisticsSlice';
+import { useAppSelector } from '@store/hooks';
+
+import { selectStatistics } from '../../selectors/selectStatistics';
+import { getParsedDuration } from '../../selectors/getParsedDuration';
 
 const Badges = () => {
   const { workTime, timeOnPause, stops } = useAppSelector(selectStatistics);
@@ -25,7 +26,7 @@ const Badges = () => {
     <StatDetails
       className={styles.grid__pause}
       badge={isTimeSpent ? 'pause' : 'pauseDefault'}
-      data={`${showParsedDuration(timeOnPause, true)}`}
+      data={`${getParsedDuration(timeOnPause, true)}`}
     />
     <StatDetails
       className={styles.grid__stop}
