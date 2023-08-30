@@ -1,6 +1,12 @@
 тесты дропдауна
 тесты модального окна, timerSection, Timer
 
+как тестить src/components/Modal/__tests__/index.test.tsx??
+
+это нужно тестировать:
+export const todayDayAndWeek = (): string => dayjs().format('d-W');
+export const currentWeek = (): number => +dayjs().format('W');
+export const currentDay = (): number => dayjs().day();
 
 при активном таймере при переходе на страницу статистики, должна ставится пауза?
 при закрытии окна?
@@ -16,10 +22,3 @@
 ну ты, если хочешь импрувнуться, можешь это сделать как сервисворкер
 будет в фоне, в браузере висеть и что-то делать - например, раз в час удалять старые данные накопившиеся
 
-
-написал костыль <p className={styles.mat__data}>{data === '  ' ? '0м' : data}</p> в src/Components/StatDetails/index.tsx
-потому что функция showParsedDuration может вернуть '  ';
-
-
- в histogram появляются infinity
- когда переключаюсь на вкладку statistics календарь должен переключиться на текущую дату.

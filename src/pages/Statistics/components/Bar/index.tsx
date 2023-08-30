@@ -21,6 +21,7 @@ const Bar = ({ altitude, isToday, onClick }: IBar) => {
 
   return (
     <div
+      data-testid='bar'
       className={clsx(styles.bar, styles[backgroundColor()])}
       onClick={onClick}
       style={{ height: altitude === 0 ? 1 + '%' : altitude + '%' }}

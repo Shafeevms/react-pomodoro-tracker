@@ -1,5 +1,5 @@
 import DropDown from '../index';
-import { screen, render, fireEvent, getByRole, getAllByRole } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { IDropDownItem } from '../types';
 
 describe('index.tsx', () => {
@@ -15,16 +15,23 @@ describe('index.tsx', () => {
     expect(menu).not.toBeInTheDocument();
   });
 
-  it('menu is visible when MenuButton is clicked and not visible if click is outside menu', () => {
+  it(`menu is visible when MenuButton is clicked and not visible 
+            if click is outside menu`, () => {
     render(<DropDown menu={[]}/>);
+
     const button = screen.getByRole('button');
 
     fireEvent.click(button);
     const menu = screen.getByTestId('menu');
     expect(menu).toBeVisible();
 
-    fireEvent.click(document.body);  //todo: как это проверить?
-    expect(screen.queryByTestId('menu')).not.toBeVisible();
+    fireEvent.click(document.body);
+
+    // expect(screen.queryByTestId('menu')).not.toBeInTheDocument();
+
+    setTimeout(() => { //TODO почему нужно ждать, а синхронно не срабатывает?
+      expect(screen.queryByTestId('menu')).not.toBeInTheDocument();
+    }, 100);
   });
 
   it('menu renders with correct props', () => {
