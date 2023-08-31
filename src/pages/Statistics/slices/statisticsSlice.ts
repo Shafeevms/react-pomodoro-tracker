@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { todayDayAndWeek } from '../../../helpers/date';
-import { getInitialDailyStat } from '../../../helpers/statistics';
+import { todayDayAndWeek } from '@helpers/date';
+import { getInitialDailyStat } from '@helpers/statistics';
+import { ONEMINUTE } from '@tracker/slices/timerCountSlice';
 
 export interface IStatisticsSlice {
   stops: number,
@@ -34,7 +35,7 @@ export const statisticsSlice = createSlice({
   extraReducers: (builder => {
     builder
       .addCase('timerCount/plusMin', (state) => {
-        state[todayDayAndWeek()].timeOnPause += 10; // TODO заменить на 60
+        state[todayDayAndWeek()].timeOnPause += ONEMINUTE;
       });
   })
 });
