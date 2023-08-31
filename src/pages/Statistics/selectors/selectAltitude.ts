@@ -1,4 +1,4 @@
-import { RootState } from '../../../store/types';
+import { RootState } from '@store/types';
 
 const selectWeekWorkData = (state: RootState) => {
   const { week: currentWeek } = state.calendar;

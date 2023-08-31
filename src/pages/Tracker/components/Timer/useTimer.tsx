@@ -41,6 +41,4 @@ export const useTimer = () => {
       clearInterval(timerRef.current);
     };
   }, [status, dispatch]);
-
-
 }

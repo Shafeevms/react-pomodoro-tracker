@@ -1,4 +1,4 @@
-import { RootState } from '../../../store/types';
+import { RootState } from '@store/types';
 import { selectDefaultTimerCount } from '../slices/timerCountSlice';
 
 const ONE_MINUTE = 60;

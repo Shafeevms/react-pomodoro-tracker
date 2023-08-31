@@ -1,9 +1,9 @@
 import { FocusEvent, KeyboardEvent, SyntheticEvent, useEffect, useRef, useState } from 'react';
-import { useAppDispatch } from '../../../../store/hooks';
+import { useAppDispatch } from '@store/hooks';
 import { editTodo, ITodo, setEditable } from '../../slices/todosSlice';
 import { useMenuMap } from './useMenuMap';
 
-import DropDown from '../../../../components/DropDown';
+import DropDown from '@components/DropDown';
 
 import styles from './index.module.scss';
 

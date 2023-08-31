@@ -1,4 +1,4 @@
-import { RootState } from '../../../store/types';
+import { RootState } from '@store/types';
 
 import { selectCurrentTodo } from '../slices/todosSlice';
 import { selectDefaultTimerView } from './selectDefaultTimerView';

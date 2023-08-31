@@ -1,7 +1,7 @@
 import Header from './Header';
 import Timer from '../Timer';
 import Button from '@components/Button';
-import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
 
 import {
   pause,
@@ -20,7 +20,7 @@ import {
 import { selectCurrentTodo } from '../../slices/todosSlice';
 
 import styles from './index.module.scss';
-import { plusStops } from '../../../Statistics/slices/statisticsSlice';
+import { plusStops } from '@statistics/slices/statisticsSlice';
 import { selectDefaultTimerView } from '../../selectors/selectDefaultTimerView';
 import { expired } from '../../actions/expired';
 

@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 
-import { WEEKDAYS } from '../../../../helpers/date';
-import { useAppSelector } from '../../../../store/hooks';
+import { WEEKDAYS } from '@helpers/date';
+import { useAppSelector } from '@store/hooks';
 import { selectCalendar } from '../../slices/calendarSlice';
 
 import styles from './index.module.scss';

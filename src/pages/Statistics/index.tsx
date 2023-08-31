@@ -6,7 +6,7 @@ import SpentTomatoes from './components/SpentTomatoes';
 import Badges from './components/Badges';
 import Histogram from './components/Histogram';
 
-import { useAppDispatch } from '../../store/hooks';
+import { useAppDispatch } from '@store/hooks';
 import { changeDay, changeWeek } from './slices/calendarSlice';
 
 import styles from './index.module.scss';

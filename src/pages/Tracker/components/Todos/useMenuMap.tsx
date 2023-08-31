@@ -1,11 +1,11 @@
-import { useAppDispatch } from '../../../../store/hooks';
+import { useAppDispatch } from '@store/hooks';
 import { minusTomato, plusTomato, setEditable } from '../../slices/todosSlice';
 
 import plus from './img/plus.svg';
 import minus from './img/minus.svg';
 import edit from './img/edit.svg';
 import del from './img/delete.svg';
-import { toggleModal } from '../../../../components/Modal/modalSlice';
+import { toggleModal } from '@components/Modal/modalSlice';
 
 
 export interface IMenuMap {

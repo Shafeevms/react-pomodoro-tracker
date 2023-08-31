@@ -1,11 +1,11 @@
-import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { deleteTodo, selectTodos } from '../../slices/todosSlice';
 
 import Form from './Form';
 import TodoItem from './TodoItem';
-import { selectModal, toggleModal } from '../../../../components/Modal/modalSlice';
-import Modal from '../../../../components/Modal';
-import Button from '../../../../components/Button';
+import { selectModal } from '@components/Modal/modalSlice';
+import Modal from '@components/Modal';
+import Button from '@components/Button';
 import { selectTotalTomatoes } from '../../selectors/selectTotalTomatoes';
 
 

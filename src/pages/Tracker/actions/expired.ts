@@ -1,6 +1,6 @@
-import { AppDispatch, RootState } from '../../../store/types';
+import { AppDispatch, RootState } from '@store/types';
 import { deleteTodo, minusTomato } from '../slices/todosSlice';
-import { plusTotalTomato } from '../../Statistics/slices/statisticsSlice';
+import { plusTotalTomato } from '@statistics/slices/statisticsSlice';
 import { fiveMinInterval, reset, start } from '../slices/timerViewSlice';
 
 export const expired = () => {

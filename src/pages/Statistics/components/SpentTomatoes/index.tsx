@@ -3,9 +3,9 @@ import tomatoWithData from './tomato_with_data.png';
 import tomatoWithoutData from './tomato_no_data.png';
 
 import styles from './index.module.scss';
-import { useAppSelector } from '../../../../store/hooks';
+import { useAppSelector } from '@store/hooks';
 import { selectStatistics } from '../../selectors/selectStatistics';
-import { declOfNum } from '../../../../helpers/declOfNum';
+import { declOfNum } from '@helpers/declOfNum';
 
 
 interface ISpentTomatoes {

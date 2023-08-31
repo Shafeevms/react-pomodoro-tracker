@@ -1,7 +1,7 @@
 import Select, { SingleValue } from 'react-select';
-import { useAppDispatch } from '../../../../store/hooks';
+import { useAppDispatch } from '@store/hooks';
 import { changeDay, changeWeek } from '../../slices/calendarSlice';
-import { currentDay, currentWeek } from '../../../../helpers/date';
+import { currentDay, currentWeek } from '@helpers/date';
 
 const options = [
   { value: 'currentWeek', label: 'Эта неделя' },

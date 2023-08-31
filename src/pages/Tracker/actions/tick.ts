@@ -1,4 +1,4 @@
-import { AppDispatch, RootState } from '../../../store/types';
+import { AppDispatch, RootState } from '@store/types';
 import { tickSecond } from '../slices/timerCountSlice';
 import { expired } from './expired';
 

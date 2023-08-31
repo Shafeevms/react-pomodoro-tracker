@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
-import { HOURS, MINUTES, SECONDS } from '../../../helpers/date';
-import { declOfNum } from '../../../helpers/declOfNum';
+import { HOURS, MINUTES, SECONDS } from '@helpers/date';
+import { declOfNum } from '@helpers/declOfNum';
 
 type TUnit = 'ч' | 'м' | 'с';
 

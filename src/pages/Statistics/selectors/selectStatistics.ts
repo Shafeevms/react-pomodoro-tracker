@@ -1,5 +1,5 @@
-import { RootState } from '../../../store/types';
-import { getInitialDailyStat } from '../../../helpers/statistics';
+import { RootState } from '@store/types';
+import { getInitialDailyStat } from '@helpers/statistics';
 
 export const selectStatistics = (state: RootState) => {
   const { day, week } = state.calendar;

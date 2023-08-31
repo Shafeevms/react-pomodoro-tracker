@@ -3,9 +3,9 @@ import clsx from 'clsx';
 import React from 'react';
 
 import styles from './index.module.scss';
-import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
 import { changeDay, selectCalendar } from '../../slices/calendarSlice';
-import { DAYS } from '../../../../helpers/date';
+import { DAYS } from '@helpers/date';
 import { selectAltitude } from '../../selectors/selectAltitude';
 import { getParsedDuration } from '../../selectors/getParsedDuration';
 

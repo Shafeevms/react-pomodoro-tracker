@@ -1,5 +1,5 @@
 import React, { ChangeEvent, SyntheticEvent, useState } from 'react';
-import { useAppDispatch } from '../../../../store/hooks';
+import { useAppDispatch } from '@store/hooks';
 
 import Button from '../../../../components/Button';
 

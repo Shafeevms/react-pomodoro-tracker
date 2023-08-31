@@ -1,5 +1,5 @@
 import { nanoid } from 'nanoid';
-import { AppDispatch } from '../../../store/types';
+import { AppDispatch } from '@store/types';
 import { add, ITodo } from '../slices/todosSlice';
 
 export const addTodo = (inputValue: string) => {
